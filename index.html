@@ -130,6 +130,7 @@
   });
 
   socket.on('userDisconnect', function(UserID) {
+    player[UserID].destroy();
     player.splice(UserID, 1);
   });
 
