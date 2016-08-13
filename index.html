@@ -38,14 +38,7 @@
     platforms.enableBody = true;
     var ground = platforms.create(0, game.world.height - 64, 'ariLUL');
     ground.body.immovable = true;
-    ground.scale.setTo(2, 2);
-    var ledge = platforms.create(400, 400, 'ariLUL');
-
-    ledge.body.immovable = true;
-
-    ledge = platforms.create(-150, 250, 'ariLUL');
-
-    ledge.body.immovable = true;
+    ground.scale.setTo(1, 20);
   }
 
   socket.on('userConnect', function(UserID) {
