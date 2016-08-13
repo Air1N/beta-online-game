@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+  <title>Chanonymousy</title>
+  <meta name="viewport" content="user-scalable=0"/>
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font: 1.1em 'Source Sans Pro', sans-serif; font-weight: bold; width: 100%; display: block;}
+  </style>
+</head>
+<body style="background: #000000; color: #404040">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="https://github.com/photonstorm/phaser/releases/download/v2.6.1/phaser.js"></script>
+  <script>
+  var socket = io();
+  var player = [];
+  var mUID;
+  var leftLength = 0;
+  var rightLength = 0;
+  var upLength = 0;
+  var lUID = 0;
+  var game = new Phaser.Game(800, 400, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+
+  function preload() {
+    game.load.image('ariLUL', '/assets/ariLUL.png');
+  }
+
+
+  function create() {
+    cursors = game.input.keyboard.createCursorKeys();
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    platforms = game.add.group();
+    platforms.enableBody = true;
+    var ground = platforms.create(0, game.world.height - 64, 'ariLUL');
+    ground.body.immovable = true;
+    ground.scale.setTo(2, 2);
+    var ledge = platforms.create(400, 400, 'ariLUL');
+
+    ledge.body.immovable = true;
+
+    ledge = platforms.create(-150, 250, 'ariLUL');
+
+    ledge.body.immovable = true;
+  }
+
+  socket.on('userConnect', function(UserID) {
+    lUID++;
+    player[UserID] = game.add.sprite(0, 0, 'ariLUL');
+    game.physics.arcade.enable(player[UserID]);
+    player[UserID].body.bounce.y = 0.2;
+    player[UserID].body.gravity.y = 300;
+    player[UserID].body.collideWorldBounds = true;
+
+    if (mUID === undefined) {
+      mUID = UserID;
+      for (i = 0; i < UserID; i++) {
+        player[i] = game.add.sprite(0, 0, 'ariLUL');
+        game.physics.arcade.enable(player[i]);
+        player[i].body.bounce.y = 0.2;
+        player[i].body.gravity.y = 300;
+        player[i].body.collideWorldBounds = true;
+      }
+      setInterval(Input, 1000/100);
+    }
+  });
+
+  function update(){
+    for (i = 0; i < lUID; i++) {
+      game.physics.arcade.collide(player[i], platforms);
+    }
+  }
+
+  function updatePos() {
+    socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID)
+  }
+
+  setInterval(updatePos, 1000);
+
+  function Input() {
+    if (cursors.right.isUp && cursors.left.isUp) {
+      if (leftLength >= 1 || rightLength >= 1) {
+        socket.emit('move', 'x ' + 0 + ' ' + mUID);
+        player[mUID].body.velocity.x = 0;
+        leftLength = 0;
+        rightLength = 0;
+      }
+    }
+
+    if (player[mUID].body.touching.down) upLength = 0;
+
+    if (cursors.left.isDown) {
+      rightLength++
+
+      if (rightLength == 1) {
+        socket.emit('move', 'x ' + -150 + ' ' + mUID);
+        player[mUID].body.velocity.x = -150;
+      }
+    }
+    if (cursors.right.isDown) {
+      leftLength++
+
+      if (leftLength == 1) {
+        socket.emit('move', 'x ' + 150 + ' ' + mUID);
+        player[mUID].body.velocity.x = 150;
+      }
+    }
+
+    if (cursors.up.isDown) {
+      upLength++
+
+      if (upLength == 1) {
+        socket.emit('move', 'y ' + -350 + ' ' + mUID);
+        player[mUID].body.velocity.y = -350;
+      }
+    }
+  }
+
+
+  socket.on('move', function(data) {
+    var ID = parseInt(data.split(' ')[2]);
+    var SPEED  = parseInt(data.split(' ')[1]);
+    var DIR = data.split(' ')[0];
+    if (parseInt(ID) != parseInt(mUID) && DIR == "x") player[ID].body.velocity.x = SPEED;
+    if (parseInt(ID) != parseInt(mUID) && DIR == "y") player[ID].body.velocity.y = SPEED;
+    //console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
+  });
+
+  socket.on('updatePos', function(data) {
+    var X = parseInt(data.split(' ')[0]);
+    var Y = parseInt(data.split(' ')[1]);
+    var ID = parseInt(data.split(' ')[2]);
+    if (parseInt(ID) != parseInt(mUID)) {
+      player[ID].position.x = X;
+      player[ID].position.y = Y;
+    }
+  });
+
+  socket.on('userDisconnect', function(UserID) {
+    player.splice(UserID, 1);
+  });
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length,c.length);
+      }
+    }
+    return "";
+  }
+  </script>
+</body>
+</html>
