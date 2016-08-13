@@ -32,6 +32,7 @@
 
 
   function create() {
+    game.stage.disableVisibilityChange = true;
     cursors = game.input.keyboard.createCursorKeys();
     game.physics.startSystem(Phaser.Physics.ARCADE);
     platforms = game.add.group();
