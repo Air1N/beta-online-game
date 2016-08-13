@@ -11,7 +11,7 @@
   body { font: 1.1em 'Source Sans Pro', sans-serif; font-weight: bold; width: 100%; display: block;}
   </style>
 </head>
-<body style="background: #000000; color: #404040">
+<body style="background: #000000; color: #404040" onkeypress="Input(e)">
   <iframe id="chatBox" src="http://chanonymous.herokuapp.com/" style="opacity: 0; position: absolute; bottom:0px; left: 0px; width: 100%; height: 35%;">Your browser doesn't support iFrames. Try updating!</iframe>
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -108,7 +108,7 @@
     }
   }
   
-  function Input() {
+  function Input(e) {
     if (cursors.right.isUp && cursors.left.isUp) {
       if (leftLength >= 1 || rightLength >= 1) {
         socket.emit('move', 'x ' + 0 + ' ' + mUID);
@@ -117,7 +117,11 @@
         rightLength = 0;
       }
     }
-
+    
+    if (e.keyCode == 13) {
+      toggleChat();
+    }
+    
     if (player[mUID].body.touching.down) upLength = 0;
 
     if (cursors.left.isDown) {
