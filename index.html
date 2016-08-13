@@ -84,15 +84,15 @@
     if (chatFade < 0.8) {
       chatFade += 0.01;
       document.getElementById("chatBox").style.opacity = chatFade;
-      setTimeout(openChat, 1000/20);
+      setTimeout(openChat, 1000/200);
     }
   }
   
   function closeChat() {
     if (chatFade > 0) {
-      chatFade -= 0.1;
+      chatFade -= 0.01;
       document.getElementById("chatBox").style.opacity = chatFade;
-      setTimeout(closeChat, 1000/20);
+      setTimeout(closeChat, 1000/200);
     }
   }
   
