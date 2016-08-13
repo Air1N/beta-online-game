@@ -57,8 +57,8 @@
     player[UserID].body.collideWorldBounds = true;
 
     if (mUID === undefined) {
+      lUID = UserID;
       mUID = UserID;
-      lUID = mUID;
       for (i = 0; i < UserID; i++) {
         player[i] = game.add.sprite(0, 0, 'ariLUL');
         game.physics.arcade.enable(player[i]);
