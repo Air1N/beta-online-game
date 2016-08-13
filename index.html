@@ -27,7 +27,15 @@
   var isChatOpen = false;
   var chatFade = 0;
   var game = new Phaser.Game(800, 400, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
+  
+  $(document).ready(function() {
+    $("#chatBox").load(function() {
+      var doc = this.contentDocument || this.contentWindow.document;
+      var target = doc.getElementById("m");
+      console.log(target);
+    });
+  });
+  
   function preload() {
     game.load.image('ariLUL', '/assets/ariLUL.png');
     
