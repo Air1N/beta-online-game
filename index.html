@@ -81,7 +81,7 @@
   }
   
   function openChat() {
-    if (chatFade < 0.85) {
+    if (chatFade < 0.85 && isChatOpen) {
       chatFade += 0.05;
       document.getElementById("chatBox").style.opacity = chatFade;
       setTimeout(openChat, 1000/100);
@@ -89,7 +89,7 @@
   }
   
   function closeChat() {
-    if (chatFade > 0) {
+    if (chatFade > 0 && !isChatOpen) {
       chatFade -= 0.05;
       document.getElementById("chatBox").style.opacity = chatFade;
       setTimeout(closeChat, 1000/100);
