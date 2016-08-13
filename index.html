@@ -81,18 +81,18 @@
   }
   
   function openChat() {
-    if (chatFade < 0.8) {
-      chatFade += 0.01;
+    if (chatFade < 0.85) {
+      chatFade += 0.05;
       document.getElementById("chatBox").style.opacity = chatFade;
-      setTimeout(openChat, 1000/200);
+      setTimeout(openChat, 1000/100);
     }
   }
   
   function closeChat() {
     if (chatFade > 0) {
-      chatFade -= 0.01;
+      chatFade -= 0.05;
       document.getElementById("chatBox").style.opacity = chatFade;
-      setTimeout(closeChat, 1000/200);
+      setTimeout(closeChat, 1000/100);
     }
   }
   
@@ -102,8 +102,7 @@
       chatFade = 0;
       openChat();
     } else {
-      chatFade = 1;
-      setTimeout(closeChat, 1000);
+      chatFade = 0.85;
     }
   }
   
