@@ -27,8 +27,6 @@
   var isChatOpen = false;
   var chatFade = 0;
   var game = new Phaser.Game(800, 400, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-  var enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-  enter.onDown.add(toggleChat, this);
 
   function preload() {
     game.load.image('ariLUL', '/assets/ariLUL.png');
@@ -37,6 +35,8 @@
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     game.scale.updateLayout(true);
+    var enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    enter.onDown.add(toggleChat, this);
   }
 
 
