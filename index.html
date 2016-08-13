@@ -27,13 +27,11 @@
   var isChatOpen = false;
   var chatFade = 0;
   var game = new Phaser.Game(800, 400, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+  var target;
   
-  $(document).ready(function() {
-    $("#chatBox").load(function() {
-      var doc = this.contentDocument || this.contentWindow.document;
-      var target = doc.getElementById("m");
-      console.log(target);
-    });
+  $("#chatBox").load(function() {
+    var doc = this.contentDocument || this.contentWindow.document;
+    target = doc.getElementById("m");
   });
   
   function preload() {
@@ -86,6 +84,7 @@
     for (i = 0; i <= lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
     }
+    console.log(target);
   }
   
   function openChat() {
