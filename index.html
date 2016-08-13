@@ -42,6 +42,7 @@
   }
 
   socket.on('userConnect', function(UserID) {
+    socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
     lUID++;
     player[UserID] = game.add.sprite(0, 0, 'ariLUL');
     game.physics.arcade.enable(player[UserID]);
@@ -68,12 +69,6 @@
       game.physics.arcade.collide(player[i], platforms);
     }
   }
-
-  function updatePos() {
-    socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID)
-  }
-
-  setInterval(updatePos, 1000*10);
 
   function Input() {
     if (cursors.right.isUp && cursors.left.isUp) {
