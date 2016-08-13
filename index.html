@@ -73,7 +73,7 @@
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID)
   }
 
-  setInterval(updatePos, 1000/100);
+  setInterval(updatePos, 1000/20);
 
   function Input() {
     if (cursors.right.isUp && cursors.left.isUp) {
