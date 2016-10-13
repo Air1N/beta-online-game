@@ -14,6 +14,7 @@ app.get('/', function(req, res){
 });
 
 app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/scripts', express.static(__dirname + '/scripts'));
 
 io.on('connection', function(socket){
   allClients.push(socket);
