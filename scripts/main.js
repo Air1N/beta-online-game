@@ -41,6 +41,17 @@ var socket = io();
     }
   }
 
+  function toggleChat() {
+    isChatOpen = !isChatOpen;
+    if (isChatOpen) {
+      chatFade = 0;
+      openChat();
+    } else {
+      chatFade = 0.85;
+      closeChat();
+    }
+  }
+
 if (gameState == "loaded") {
   socket.on('userConnect', function(UserID) {
     lUID++;
@@ -81,16 +92,7 @@ if (gameState == "loaded") {
     }
   }
   
-  function toggleChat() {
-    isChatOpen = !isChatOpen;
-    if (isChatOpen) {
-      chatFade = 0;
-      openChat();
-    } else {
-      chatFade = 0.85;
-      closeChat();
-    }
-  }
+  
   
   function Input() {
     if (cursors.right.isUp && cursors.left.isUp) {
