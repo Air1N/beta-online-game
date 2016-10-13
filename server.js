@@ -16,7 +16,7 @@ setTimeout( function() {
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-}, 10);
+}, 500);
 
 io.on('connection', function(socket){
   allClients.push(socket);
