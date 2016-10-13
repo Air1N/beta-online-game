@@ -37,7 +37,7 @@ var socket = io();
   
   function update(){
     for (i = 0; i <= lUID; i++) {
-      game.physics.arcade.collide(player[i], platforms);
+      //game.physics.arcade.collide(player[i], platforms);
     }
   }
 
