@@ -12,11 +12,9 @@ var allClients = [];
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
 
-setTimeout( function() {
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-}, 500);
 
 io.on('connection', function(socket){
   allClients.push(socket);
