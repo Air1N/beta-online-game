@@ -34,6 +34,13 @@ var socket = io();
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
   }
+  
+  function update(){
+    for (i = 0; i <= lUID; i++) {
+      game.physics.arcade.collide(player[i], platforms);
+    }
+  }
+
 if (gameState == "loaded") {
   socket.on('userConnect', function(UserID) {
     lUID++;
@@ -57,12 +64,6 @@ if (gameState == "loaded") {
     }
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
   });
-
-  function update(){
-    for (i = 0; i <= lUID; i++) {
-      game.physics.arcade.collide(player[i], platforms);
-    }
-  }
   
   function openChat() {
     if (chatFade < 0.85 && isChatOpen) {
