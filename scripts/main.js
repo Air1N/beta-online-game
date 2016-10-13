@@ -133,7 +133,7 @@ if (gameState == "loaded") {
   
   function manualInput(e) {
     if (e.keyCode == 13) {
-      toggleChat();
+      //toggleChat();
     }
   }
   
