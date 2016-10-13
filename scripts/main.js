@@ -33,11 +33,15 @@ var socket = io();
     var ground = platforms.create(-200, game.world.height - 64, 'ariLUL');
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
+    
+    for (i = 0; i <= lUID; i++) {
+      player[i].loadTexture('ariLUL');
+    }
   }
   
   function update(){
     for (i = 0; i <= lUID; i++) {
-      //game.physics.arcade.collide(player[i], platforms);
+      game.physics.arcade.collide(player[i], platforms);
     }
   }
 
@@ -52,7 +56,6 @@ var socket = io();
     }
   }
 
-if (gameState == "loaded") {
   socket.on('userConnect', function(UserID) {
     lUID++;
     player[UserID] = game.add.sprite(0, 0, 'ariLUL');
@@ -177,4 +180,3 @@ if (gameState == "loaded") {
     }
     return "";
   }
-}
