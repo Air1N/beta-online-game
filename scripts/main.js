@@ -9,7 +9,8 @@ var socket = io();
   var chatFade = 0;
   var game = new Phaser.Game(800, 400, Phaser.AUTO, '', { preload: preload, create: create, update: update });
   var target;
-  
+  var gameState = "";
+
   function preload() {
     game.load.image('ariLUL', '/assets/ariLUL.png');
     
@@ -19,6 +20,7 @@ var socket = io();
     game.scale.updateLayout(true);
     var enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     enter.onDown.add(toggleChat, this);
+    gameState = "loaded";
   }
 
 
@@ -32,7 +34,7 @@ var socket = io();
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
   }
-
+if (gameState == "loaded") {
   socket.on('userConnect', function(UserID) {
     lUID++;
     player[UserID] = game.add.sprite(0, 0, 'ariLUL');
@@ -172,3 +174,4 @@ var socket = io();
     }
     return "";
   }
+}
