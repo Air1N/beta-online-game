@@ -35,7 +35,7 @@ var socket = io();
     gameState = "loaded";
     
     for (i = 0; i <= lUID; i++) {
-        conole.log(i)
+        console.log(i)
         var plx = player[i].position.x;
         var ply = player[i].position.y;
         //player[i].destroy();
@@ -156,7 +156,7 @@ function Input() {
   
   socket.on('move', function(data) {
     var ID = parseInt(data.split(' ')[2]);
-    conole.log(ID)
+    console.log(ID)
     var SPEED  = parseInt(data.split(' ')[1]);
     var DIR = data.split(' ')[0];
     console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
