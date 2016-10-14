@@ -35,8 +35,9 @@ var socket = io();
     ground.scale.setTo(50, 2);
     
     for (i = 0; i <= lUID; i++) {
+      console.log(player[i]);
+      if (player[i] == null) console.error("player[" + i + "]" + " doesn't exist.");
       player[i].setTexture('ariLUL');
-      console.log(player[i])
     }
   }
   
