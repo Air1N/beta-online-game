@@ -33,6 +33,14 @@ var socket = io();
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
     gameState = "loaded";
+    
+    for (i = 0; i <= lUID; i++) {
+        player[i] = game.add.sprite(0, 0, 'ariLUL');
+        game.physics.arcade.enable(player[i]);
+        player[i].body.bounce.y = 0.2;
+        player[i].body.gravity.y = 300;
+        player[i].body.collideWorldBounds = true;
+    }
   }
   
   function reloadTexture(i) {
@@ -47,7 +55,6 @@ var socket = io();
   function update(){
     for (i = 0; i <= lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
-      reloadTexture(i);
     }
   }
 
