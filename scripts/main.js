@@ -168,8 +168,8 @@ socket.on('move', function (data) {
 		if (data.x != null) player[data.ID].body.velocity.x = data.x;
 		if (data.y != null) player[data.ID].body.velocity.y = data.y;
 		
-		player[data.ID].movex = data.x;
-		player[data.ID].movey = data.y;
+		if (data.x != null) player[data.ID].movex = data.x;
+		if (data.y != null) player[data.ID].movey = data.y;
 });
 
 socket.on('updatePos', function (data) {
