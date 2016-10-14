@@ -167,12 +167,15 @@ socket.on('move', function (data) {
 		
 		if (data.x != null) player[data.ID].body.velocity.x = data.x;
 		if (data.y != null) player[data.ID].body.velocity.y = data.y;
+		
+		player[data.ID].movex = data.x;
+		player[data.ID].movey = data.y;
 });
 
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = player[data.ID].body.velocity.x + parseInt(data.x - player[data.ID].x) / 10;
-        player[data.ID].body.velocity.y = player[data.ID].body.velocity.y + parseInt(data.y - player[data.ID].y) / 10;
+		player[data.ID].body.velocity.x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
+        player[data.ID].body.velocity.y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
 	}
 });
 
