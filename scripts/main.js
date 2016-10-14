@@ -54,6 +54,7 @@ function loadSprite(i) {
 function update() {
 	for (i = 0; i <= lUID; i++) {
 		game.physics.arcade.collide(player[i], platforms);
+		player[i].movey = player[i].body.velocity.y;
 	}
 	Input();
 }
