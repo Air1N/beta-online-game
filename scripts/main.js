@@ -35,7 +35,7 @@ var socket = io();
     ground.scale.setTo(50, 2);
     
     for (i = 0; i < lUID; i++) {
-      player[i].texture = 'ariLUL';
+      player[i].setTexture('ariLUL');
     }
   }
   
