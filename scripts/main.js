@@ -34,7 +34,7 @@ var socket = io();
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
     
-    for (i = 0; i < lUID; i++) {
+    for (i = 0; i <= lUID; i++) {
       player[i].setTexture('ariLUL');
       console.log(player[i])
     }
