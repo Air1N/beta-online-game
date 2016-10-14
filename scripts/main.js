@@ -61,6 +61,7 @@ var socket = io();
     for (i = 0; i <= lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
     }
+    Input();
   }
 
   function toggleChat() {
@@ -77,20 +78,12 @@ var socket = io();
   socket.on('userConnect', function(data) {
     lUID = data.laUID;
     UserID = data.UserID;
-    player[UserID] = game.add.sprite(0, 0, 'ariLUL');
-    game.physics.arcade.enable(player[UserID]);
-    player[UserID].body.bounce.y = 0.2;
-    player[UserID].body.gravity.y = 300;
-    player[UserID].body.collideWorldBounds = true;
 
-    if (mUID === undefined) {
-      mUID = UserID;
+    if (mUID === undefined) mUID = UserID;
       for (i = 0; i < UserID; i++) {
-        player[i] = {position: {x: 0, y: 0}};
+       if (player[i] == null) player[i] = {position: {x: 0, y: 0}};
       }
       console.log(mUID + " // " + lUID)
-      setInterval(Input, 1000/30);
-    }
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
     console.log(player[mUID].position.x + " // " + player[mUID].position.y)
   });
