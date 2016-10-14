@@ -109,7 +109,7 @@ function compLag() {
 	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y});
 }
 
-setTimeout(compLag, 1000/1)
+setTimeout(compLag, 1000/30)
 
 function Input() {
 	if (cursors) {
