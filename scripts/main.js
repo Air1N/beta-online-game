@@ -110,14 +110,14 @@ function compLag(data) {
 		player[data.ID].body.velocity.x = player[data.ID].body.velocity.x + parseInt(data.x - player[data.ID].x) / 10;
         player[data.ID].body.velocity.y = player[data.ID].body.velocity.y + parseInt(data.y - player[data.ID].y) / 10;
 	}
-	if (parseInt(new Date() - data.time) < 245) setTimeout(compLag, 1000/30, data);
+	if (parseInt(new Date() - data.time) < 1000 / 20) setTimeout(compLag, 1000 / 30, data);
 }
 
 
 
 setInterval(function() {
 	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
-}, 1000 / 4);
+}, 1000 / 20);
 
 function Input() {
 	if (cursors) {
