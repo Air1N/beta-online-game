@@ -34,15 +34,14 @@ var socket = io();
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
     
-    for (i = 0; i <= lUID; i++) {
-      player[i].loadTexture('ariLUL');
+    for (i = 0; i < lUID; i++) {
+      player[i].texture = 'ariLUL';
     }
   }
   
   function update(){
-    for (i = 0; i <= lUID; i++) {
+    for (i = 0; i < lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
-      console.log(i)
     }
   }
 
