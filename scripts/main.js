@@ -107,46 +107,40 @@ var socket = io();
   
   
   
-  function Input() {
-    if (cursors) {
+function Input() {
+  if (cursors) {
     if (cursors.right.isUp && cursors.left.isUp) {
-      if (leftLength >= 1 || rightLength >= 1) {
         socket.emit('move', 'x ' + 0 + ' ' + mUID);
         player[mUID].body.velocity.x = 0;
-        leftLength = 0;
-        rightLength = 0;
-      }
+      
+        left = false;
+        right = false;
     }
     
-    if (player[mUID].body.touching.down) upLength = 0;
+    if (player[mUID].body.touching.down) up = false;
 
     if (cursors.left.isDown) {
-      rightLength++
-
-      if (rightLength == 1) {
-        socket.emit('move', 'x ' + -150 + ' ' + mUID);
-        player[mUID].body.velocity.x = -150;
-      }
+      left = true;
+      
+      socket.emit('move', 'x ' + -150 + ' ' + mUID);
+      player[mUID].body.velocity.x = -150;
     }
+      
     if (cursors.right.isDown) {
-      leftLength++
-
-      if (leftLength == 1) {
-        socket.emit('move', 'x ' + 150 + ' ' + mUID);
-        player[mUID].body.velocity.x = 150;
-      }
+      right = true;
+      
+      socket.emit('move', 'x ' + 150 + ' ' + mUID);
+      player[mUID].body.velocity.x = 150;
     }
 
     if (cursors.up.isDown) {
-      upLength++
+      up = true;
 
-      if (upLength == 1) {
-        socket.emit('move', 'y ' + -350 + ' ' + mUID);
-        player[mUID].body.velocity.y = -350;
-      }
-    }
+      socket.emit('move', 'y ' + -350 + ' ' + mUID);
+      player[mUID].body.velocity.y = -350;
     }
   }
+}
   
   function manualInput(e) {
     if (e.keyCode == 13) {
