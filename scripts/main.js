@@ -20,7 +20,6 @@ var socket = io();
     game.scale.updateLayout(true);
     var enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     enter.onDown.add(toggleChat, this);
-    gameState = "loaded";
   }
 
 
@@ -33,17 +32,19 @@ var socket = io();
     var ground = platforms.create(-200, game.world.height - 64, 'ariLUL');
     ground.body.immovable = true;
     ground.scale.setTo(50, 2);
-    
-    for (i = 0; i <= lUID; i++) {
-      console.log(player[i]);
-      if (player[i] == null) console.error("player[" + i + "]" + " doesn't exist.");
-      //player[i].setTexture('ariLUL');
-    }
+    gameState = "loaded";
   }
   
+  function reloadTexture(i) {
+        console.log(player[i]);
+        if (player[i] == null) console.error("player[" + i + "]" + " doesn't exist.");
+        player[i].setTexture('ariLUL');
+  }
+
   function update(){
     for (i = 0; i <= lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
+      reloadTexture(i);
     }
   }
 
