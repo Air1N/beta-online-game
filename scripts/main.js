@@ -116,7 +116,7 @@ function compLag(data) {
 
 
 
-setTimeout(function() {
+setInterval(function() {
 	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
 }, 1000 / 1);
 
