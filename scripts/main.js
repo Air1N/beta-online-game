@@ -72,7 +72,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-
+	
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
@@ -109,7 +109,7 @@ function Input() {
 	if (cursors) {
 		if (cursors.right.isUp && cursors.left.isUp) {
 			if (player[mUID].body.velocity.x != 0)
-				socket.emit('move', 'x ' + 0 + ' ' + mUID);
+				socket.emit('move', {mUID: mUID, x: 0, time: new Date()});
 			if (player[mUID].body.velocity.x != 0)
 				player[mUID].body.velocity.x = 0;
 
@@ -124,7 +124,7 @@ function Input() {
 			left = true;
 
 			if (player[mUID].body.velocity.x != -150)
-				socket.emit('move', 'x ' + -150 + ' ' + mUID);
+				socket.emit('move', {mUID: mUID, x: -150, time: new Date()});
 			if (player[mUID].body.velocity.x != -150)
 				player[mUID].body.velocity.x = -150;
 		}
@@ -133,7 +133,7 @@ function Input() {
 			right = true;
 
 			if (player[mUID].body.velocity.x != 150)
-				socket.emit('move', 'x ' + 150 + ' ' + mUID);
+				socket.emit('move', {mUID: mUID, x: 150, time: new Date()});
 			if (player[mUID].body.velocity.x != 150)
 				player[mUID].body.velocity.x = 150;
 		}
@@ -142,7 +142,7 @@ function Input() {
 			up = true;
 
 			if (player[mUID].body.velocity.y != -350)
-				socket.emit('move', 'y ' + -350 + ' ' + mUID);
+				socket.emit('move', {ID: mUID, y: -350, time: new Date()});
 			if (player[mUID].body.velocity.y != -350)
 				player[mUID].body.velocity.y = -350;
 		}
@@ -150,13 +150,10 @@ function Input() {
 }
 
 socket.on('move', function (data) {
-	var ID = parseInt(data.split(' ')[2]);
-	var SPEED = parseInt(data.split(' ')[1]);
-	var DIR = data.split(' ')[0];
-	if (parseInt(ID) != parseInt(mUID) && DIR == "x")
-		player[ID].body.velocity.x = SPEED;
-	if (parseInt(ID) != parseInt(mUID) && DIR == "y")
-		player[ID].body.velocity.y = SPEED;
+		var timeDiff = new Date() - data.time;
+		
+		if (data.x != null) player[data.ID].body.velocity.x = data.x;
+		if (data.y != null) player[data.ID].body.velocity.y = data.y;
 });
 
 socket.on('updatePos', function (data) {
