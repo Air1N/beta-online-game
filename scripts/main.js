@@ -74,7 +74,8 @@ var socket = io();
         player[i].body.gravity.y = 300;
         player[i].body.collideWorldBounds = true;
       }
-      setInterval(Input, 1000/100);
+      console.log(mUID + " // " + lUID)
+      setInterval(Input, 1000/30);
     }
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
   });
@@ -98,7 +99,7 @@ var socket = io();
   
   
   function Input() {
-    if (cursors.right.isUp && cursors.left.isUp) {
+    if (cursors && cursors.right.isUp && cursors.left.isUp) {
       if (leftLength >= 1 || rightLength >= 1) {
         socket.emit('move', 'x ' + 0 + ' ' + mUID);
         player[mUID].body.velocity.x = 0;
