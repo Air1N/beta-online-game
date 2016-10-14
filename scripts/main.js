@@ -157,9 +157,9 @@ function Input() {
     var ID = parseInt(data.split(' ')[2]);
     var SPEED  = parseInt(data.split(' ')[1]);
     var DIR = data.split(' ')[0];
+    console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
     if (parseInt(ID) != parseInt(mUID) && DIR == "x") player[ID].body.velocity.x = SPEED;
     if (parseInt(ID) != parseInt(mUID) && DIR == "y") player[ID].body.velocity.y = SPEED;
-    //console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
   });
 
   socket.on('updatePos', function(data) {
