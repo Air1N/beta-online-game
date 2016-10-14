@@ -105,11 +105,19 @@ function closeChat() {
 	}
 }
 
-function compLag() {
-	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y});
+function compLag(data) {
+	if (parseInt(data.ID) != parseInt(mUID)) {
+		player[data.ID].body.velocity.x = (data.x - player[data.ID].x) * 5;
+        player[data.ID].body.velocity.y = (data.y - player[data.ID].y) * 5;
+	}
+	if (new Date() - data.time < 1005) setTimeout(compLag, 1000/30, data);
 }
 
-setTimeout(compLag, 1000/30)
+
+
+setTimeout(function() {
+	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
+}, 1000/1);
 
 function Input() {
 	if (cursors) {
@@ -163,10 +171,7 @@ socket.on('move', function (data) {
 });
 
 socket.on('updatePos', function (data) {
-	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = (data.x - player[data.ID].x) * 5;
-        player[data.ID].body.velocity.y = (data.y - player[data.ID].y) * 5;
-	}
+	compLag(data);
 });
 
 socket.on('userDisconnect', function (UserID) {
