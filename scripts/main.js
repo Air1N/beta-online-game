@@ -69,8 +69,8 @@ var socket = io();
     }
   }
 
-  socket.on('userConnect', function(UserID) {
-    lUID++;
+  socket.on('userConnect', function(UserID, laUID) {
+    lUID = laUID;
     player[UserID] = game.add.sprite(0, 0, 'ariLUL');
     game.physics.arcade.enable(player[UserID]);
     player[UserID].body.bounce.y = 0.2;
@@ -78,7 +78,6 @@ var socket = io();
     player[UserID].body.collideWorldBounds = true;
 
     if (mUID === undefined) {
-      lUID = UserID;
       mUID = UserID;
       for (i = 0; i < UserID; i++) {
         player[i] = {position: {x: 0, y: 0}};
