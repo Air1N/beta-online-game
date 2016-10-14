@@ -107,17 +107,17 @@ function closeChat() {
 
 function compLag(data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = (data.x - player[data.ID].x) * 5;
-        player[data.ID].body.velocity.y = (data.y - player[data.ID].y) * 5;
+		player[data.ID].body.velocity.x = parseInt(data.x - player[data.ID].x) / 10;
+        player[data.ID].body.velocity.y = parseInt(data.y - player[data.ID].y) / 10;
 	}
-	if (new Date() - data.time < 990) setTimeout(compLag, 1000/30, data);
+	if (parseInt(new Date() - data.time) < 245) setTimeout(compLag, 1000/30, data);
 }
 
 
 
 setInterval(function() {
 	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
-}, 1000 / 1);
+}, 1000 / 4);
 
 function Input() {
 	if (cursors) {
