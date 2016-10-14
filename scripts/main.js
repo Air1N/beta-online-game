@@ -35,7 +35,7 @@ var socket = io();
     gameState = "loaded";
     
     for (i = 0; i <= lUID; i++) {
-        player[i] = game.add.sprite(0, 0, 'ariLUL');
+        player[i] = game.add.sprite(player[i].position.x, player[i].position.y, 'ariLUL');
         game.physics.arcade.enable(player[i]);
         player[i].body.bounce.y = 0.2;
         player[i].body.gravity.y = 300;
@@ -81,11 +81,7 @@ var socket = io();
       lUID = UserID;
       mUID = UserID;
       for (i = 0; i < UserID; i++) {
-        player[i] = game.add.sprite(0, 0, 'ariLUL');
-        game.physics.arcade.enable(player[i]);
-        player[i].body.bounce.y = 0.2;
-        player[i].body.gravity.y = 300;
-        player[i].body.collideWorldBounds = true;
+        player[i] = {position.x: 0, position.y: 0};
       }
       console.log(mUID + " // " + lUID)
       setInterval(Input, 1000/30);
