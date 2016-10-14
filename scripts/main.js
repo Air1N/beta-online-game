@@ -109,6 +109,7 @@ function compLag(data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
 		player[data.ID].body.velocity.x = (data.x - player[data.ID].x) * 20;
         player[data.ID].body.velocity.y = (data.y - player[data.ID].y) * 20;
+		console.log(data.x - player[data.ID].x + " // " + player[data.ID].body.velocity.x);
 	}
 	if (new Date() - data.time < 990) setTimeout(compLag, 1000/30, data);
 }
