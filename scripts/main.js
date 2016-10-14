@@ -42,17 +42,13 @@ function create() {
 }
 
 function loadSprite(i) {
-	console.log(i + " // Defining");
 	var plx = player[i].position.x;
 	var ply = player[i].position.y;
-	player[i];
-	//player.splice(i, 1);
 	player[i] = game.add.sprite(plx, ply, 'ariLUL');
 	game.physics.arcade.enable(player[i]);
 	player[i].body.bounce.y = 0.2;
 	player[i].body.gravity.y = 600;
 	player[i].body.collideWorldBounds = true;
-	console.log(player[i]);
 }
 
 function update() {
@@ -80,7 +76,6 @@ socket.on('userConnect', function (data) {
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
-		console.log(i + " // First Spawn")
 		if (player[i] == null) {
 			player[i] = {
 				position : {
@@ -91,9 +86,7 @@ socket.on('userConnect', function (data) {
 			loadSprite(i);
 		}
 	}
-	console.log(mUID + "M // U" + lUID + " // New User UUID")
 	socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
-	console.log(player[mUID].position.x + " // " + player[mUID].position.y + " // Old Users Positions // " + mUID)
 });
 
 function openChat() {
@@ -156,17 +149,10 @@ function Input() {
 	}
 }
 
-function manualInput(e) {
-	if (e.keyCode == 13) {
-		//toggleChat();
-	}
-}
-
 socket.on('move', function (data) {
 	var ID = parseInt(data.split(' ')[2]);
 	var SPEED = parseInt(data.split(' ')[1]);
 	var DIR = data.split(' ')[0];
-	//console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
 	if (parseInt(ID) != parseInt(mUID) && DIR == "x")
 		player[ID].body.velocity.x = SPEED;
 	if (parseInt(ID) != parseInt(mUID) && DIR == "y")
