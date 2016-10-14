@@ -25,6 +25,11 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     var UserID = allClients.indexOf(socket);
     console.log('ID: ' + UserID + ' disconnected.');
+    for (i = 0; i < allClients.length; i++) {
+      if (i > UserID) {
+       console.log('ID: ' + UserID + ' -> ' + UserID - 1);
+      }
+    }
     io.emit('userDisconnect', UserID)
     allClients.splice(UserID, 1);
   });
