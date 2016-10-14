@@ -81,7 +81,7 @@ var socket = io();
       lUID = UserID;
       mUID = UserID;
       for (i = 0; i < UserID; i++) {
-        player[i] = {position.x: 0, position.y: 0};
+        player[i] = {position: {x: 0, y: 0}};
       }
       console.log(mUID + " // " + lUID)
       setInterval(Input, 1000/30);
