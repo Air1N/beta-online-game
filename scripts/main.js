@@ -174,8 +174,8 @@ socket.on('move', function (data) {
 
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
-        player[data.ID].body.velocity.y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
+		if (player[data.ID].movex != null) player[data.ID].body.velocity.x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
+        if (player[data.ID].movey != null) player[data.ID].body.velocity.y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
 	}
 });
 
