@@ -168,6 +168,7 @@ function Input() {
     player[UserID].destroy();
     player.splice(UserID, 1);
     if (UserID < mUID) mUID--;
+    lUID--;
   });
 
   function getCookie(cname) {
