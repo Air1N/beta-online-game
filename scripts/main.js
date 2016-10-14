@@ -35,6 +35,7 @@ var socket = io();
     gameState = "loaded";
     
     for (i = 0; i <= lUID; i++) {
+        player[i].destroy();
         player[i] = game.add.sprite(player[i].position.x, player[i].position.y, 'ariLUL');
         game.physics.arcade.enable(player[i]);
         player[i].body.bounce.y = 0.2;
@@ -69,8 +70,9 @@ var socket = io();
     }
   }
 
-  socket.on('userConnect', function(UserID, laUID) {
-    lUID = laUID;
+  socket.on('userConnect', function(data) {
+    lUID = data.laUID;
+    UserID = data.UserID;
     player[UserID] = game.add.sprite(0, 0, 'ariLUL');
     game.physics.arcade.enable(player[UserID]);
     player[UserID].body.bounce.y = 0.2;
