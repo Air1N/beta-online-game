@@ -36,6 +36,7 @@ var socket = io();
     
     for (i = 0; i < lUID; i++) {
       player[i].setTexture('ariLUL');
+      console.log(player[i])
     }
   }
   
