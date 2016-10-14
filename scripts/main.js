@@ -34,8 +34,11 @@ var socket = io();
     ground.scale.setTo(50, 2);
     gameState = "loaded";
     
-    for (i = 0; i <= lUID; i++) {
-        console.log(i + " // Defining")
+    for (i = 0; i <= lUID; i++) loadSprite(i);
+  }
+  
+  function loadSprite(i) {
+        console.log(i + " // Defining");
         var plx = player[i].position.x;
         var ply = player[i].position.y;
         //player[i].destroy();
@@ -45,17 +48,7 @@ var socket = io();
         player[i].body.bounce.y = 0.2;
         player[i].body.gravity.y = 300;
         player[i].body.collideWorldBounds = true;
-        console.log(player[i] + " // Defining")
-    }
-  }
-  
-  function reloadTexture(i) {
-        if (player[i] == null) {
-          console.error("player[" + i + "]" + " doesn't exist.");
-          return;
-        }
         console.log(player[i]);
-        player[i].setTexture('ariLUL');
   }
 
   function update(){
@@ -83,7 +76,10 @@ var socket = io();
     if (mUID === undefined) mUID = UserID;
     for (i = 0; i <= lUID; i++) {
       console.log(i + " // First Spawn")
-      if (player[i] == null) player[i] = {position: {x: 0, y: 0}};
+      if (player[i] == null) {
+        player[i] = {position: {x: 0, y: 0}};
+        loadSprite(i);
+      }
     }
     console.log(mUID + "M // U" + lUID + " // New User UUID")
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
