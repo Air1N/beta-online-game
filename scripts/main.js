@@ -36,8 +36,11 @@ var socket = io();
   }
   
   function reloadTexture(i) {
+        if (player[i] == null) {
+          console.error("player[" + i + "]" + " doesn't exist.");
+          return;
+        }
         console.log(player[i]);
-        if (player[i] == null) console.error("player[" + i + "]" + " doesn't exist.");
         player[i].setTexture('ariLUL');
   }
 
