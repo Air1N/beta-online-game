@@ -12,6 +12,7 @@ var socket = io();
   var gameState = "";
 
   function preload() {
+    game.stage.disableVisibilityChange = true;
     game.load.image('ariLUL', '/assets/ariLUL.png');
     
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -24,7 +25,6 @@ var socket = io();
 
 
   function create() {
-    game.stage.disableVisibilityChange = true;
     cursors = game.input.keyboard.createCursorKeys();
     game.physics.startSystem(Phaser.Physics.ARCADE);
     platforms = game.add.group();
