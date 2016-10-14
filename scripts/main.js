@@ -105,6 +105,12 @@ function closeChat() {
 	}
 }
 
+function compLag() {
+	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y});
+}
+
+setTimeout(compLag, 1000/1)
+
 function Input() {
 	if (cursors) {
 		if (cursors.right.isUp && cursors.left.isUp) {
