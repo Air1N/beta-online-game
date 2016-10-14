@@ -37,12 +37,12 @@ var socket = io();
     for (i = 0; i <= lUID; i++) {
       console.log(player[i]);
       if (player[i] == null) console.error("player[" + i + "]" + " doesn't exist.");
-      player[i].setTexture('ariLUL');
+      //player[i].setTexture('ariLUL');
     }
   }
   
   function update(){
-    for (i = 0; i < lUID; i++) {
+    for (i = 0; i <= lUID; i++) {
       game.physics.arcade.collide(player[i], platforms);
     }
   }
