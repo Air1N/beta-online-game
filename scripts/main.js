@@ -36,6 +36,7 @@ var socket = io();
     
     for (i = 0; i <= lUID; i++) {
         player[i].destroy();
+        player.splice(i, 1);
         player[i] = game.add.sprite(player[i].position.x, player[i].position.y, 'ariLUL');
         game.physics.arcade.enable(player[i]);
         player[i].body.bounce.y = 0.2;
