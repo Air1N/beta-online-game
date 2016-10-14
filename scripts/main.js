@@ -1,9 +1,9 @@
 var socket = io();
   var player = [];
   var mUID;
-  var leftLength = 0;
-  var rightLength = 0;
-  var upLength = 0;
+  var left = false;
+  var right = false;
+  var up = false;
   var lUID = 0;
   var isChatOpen = false;
   var chatFade = 0;
@@ -130,7 +130,7 @@ function Input() {
       player[mUID].body.velocity.x = 150;
     }
 
-    if (cursors.up.isDown) {
+    if (cursors.up.isDown && !up) {
       up = true;
 
       socket.emit('move', 'y ' + -350 + ' ' + mUID);
