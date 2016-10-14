@@ -27,7 +27,7 @@ io.on('connection', function(socket){
     console.log('ID: ' + UserID + ' disconnected.');
     for (i = 0; i < allClients.length; i++) {
       if (i > UserID) {
-       console.log('ID: ' + UserID + ' -> ' + parseInt(UserID - 1));
+       console.log('ID: ' + i + ' -> ' + parseInt(i - 1));
       }
     }
     io.emit('userDisconnect', UserID)
