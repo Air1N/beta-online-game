@@ -46,7 +46,7 @@ var socket = io();
         player[i] = game.add.sprite(plx, ply, 'ariLUL');
         game.physics.arcade.enable(player[i]);
         player[i].body.bounce.y = 0.2;
-        player[i].body.gravity.y = 300;
+        player[i].body.gravity.y = 600;
         player[i].body.collideWorldBounds = true;
         console.log(player[i]);
   }
