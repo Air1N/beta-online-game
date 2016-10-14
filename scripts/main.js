@@ -99,7 +99,8 @@ var socket = io();
   
   
   function Input() {
-    if (cursors && cursors.right.isUp && cursors.left.isUp) {
+    if (cursors) {
+    if (cursors.right.isUp && cursors.left.isUp) {
       if (leftLength >= 1 || rightLength >= 1) {
         socket.emit('move', 'x ' + 0 + ' ' + mUID);
         player[mUID].body.velocity.x = 0;
@@ -134,6 +135,7 @@ var socket = io();
         socket.emit('move', 'y ' + -350 + ' ' + mUID);
         player[mUID].body.velocity.y = -350;
       }
+    }
     }
   }
   
