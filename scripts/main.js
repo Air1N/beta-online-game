@@ -86,7 +86,7 @@ socket.on('userConnect', function (data) {
 			loadSprite(i);
 		}
 	}
-	socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
+	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y});
 });
 
 function openChat() {
@@ -157,12 +157,9 @@ socket.on('move', function (data) {
 });
 
 socket.on('updatePos', function (data) {
-	var X = parseInt(data.split(' ')[0]);
-	var Y = parseInt(data.split(' ')[1]);
-	var ID = parseInt(data.split(' ')[2]);
-	if (parseInt(ID) != parseInt(mUID)) {
-		player[ID].position.x = X;
-		player[ID].position.y = Y;
+	if (parseInt(data.ID) != parseInt(mUID)) {
+		player[data.ID].body.velocity.x = (data.x - player[data.ID].x) * 5;
+        player[data.ID].body.velocity.y = (data.y - player[data.ID].y) * 5;
 	}
 });
 
