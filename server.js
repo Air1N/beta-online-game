@@ -19,7 +19,7 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   allClients.push(socket);
   var UserID = allClients.indexOf(socket);
-  io.emit('userConnect', (UserID, allClients.length - 1));
+  io.emit('userConnect', {UserID: UserID, laUID: allClients.length});
   console.log('ID: ' + UserID + ' connected.');
 
   socket.on('disconnect', function(){
