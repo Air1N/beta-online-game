@@ -37,7 +37,7 @@ var socket = io();
     for (i = 0; i <= lUID; i++) {
         var plx = player[i].position.x;
         var ply = player[i].position.y;
-        player[i].destroy();
+        //player[i].destroy();
         player.splice(i, 1);
         player[i] = game.add.sprite(plx, ply, 'ariLUL');
         game.physics.arcade.enable(player[i]);
