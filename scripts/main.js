@@ -109,7 +109,7 @@ function Input() {
 	if (cursors) {
 		if (cursors.right.isUp && cursors.left.isUp) {
 			if (player[mUID].body.velocity.x != 0)
-				socket.emit('move', {mUID: mUID, x: 0, time: new Date()});
+				socket.emit('move', {ID: mUID, x: 0, time: new Date()});
 			if (player[mUID].body.velocity.x != 0)
 				player[mUID].body.velocity.x = 0;
 
@@ -124,7 +124,7 @@ function Input() {
 			left = true;
 
 			if (player[mUID].body.velocity.x != -150)
-				socket.emit('move', {mUID: mUID, x: -150, time: new Date()});
+				socket.emit('move', {ID: mUID, x: -150, time: new Date()});
 			if (player[mUID].body.velocity.x != -150)
 				player[mUID].body.velocity.x = -150;
 		}
@@ -133,7 +133,7 @@ function Input() {
 			right = true;
 
 			if (player[mUID].body.velocity.x != 150)
-				socket.emit('move', {mUID: mUID, x: 150, time: new Date()});
+				socket.emit('move', {ID: mUID, x: 150, time: new Date()});
 			if (player[mUID].body.velocity.x != 150)
 				player[mUID].body.velocity.x = 150;
 		}
