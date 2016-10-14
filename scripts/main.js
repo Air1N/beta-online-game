@@ -107,8 +107,8 @@ function closeChat() {
 
 function compLag(data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = parseInt(data.x - player[data.ID].x) / 10;
-        player[data.ID].body.velocity.y = parseInt(data.y - player[data.ID].y) / 10;
+		player[data.ID].body.velocity.x = player[data.ID].body.velocity.x + parseInt(data.x - player[data.ID].x) / 10;
+        player[data.ID].body.velocity.y = player[data.ID].body.velocity.y + parseInt(data.y - player[data.ID].y) / 10;
 	}
 	if (parseInt(new Date() - data.time) < 245) setTimeout(compLag, 1000/30, data);
 }
