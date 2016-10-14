@@ -107,8 +107,8 @@ var socket = io();
 function Input() {
   if (cursors) {
     if (cursors.right.isUp && cursors.left.isUp) {
-        socket.emit('move', 'x ' + 0 + ' ' + mUID);
-        player[mUID].body.velocity.x = 0;
+        if (player[mUID].body.velocity.x != 0) socket.emit('move', 'x ' + 0 + ' ' + mUID);
+        if (player[mUID].body.velocity.x != 0) player[mUID].body.velocity.x = 0;
       
         left = false;
         right = false;
@@ -119,22 +119,22 @@ function Input() {
     if (cursors.left.isDown) {
       left = true;
       
-      socket.emit('move', 'x ' + -150 + ' ' + mUID);
-      player[mUID].body.velocity.x = -150;
+      if (player[mUID].body.velocity.x != -150) socket.emit('move', 'x ' + -150 + ' ' + mUID);
+      if (player[mUID].body.velocity.x != -150) player[mUID].body.velocity.x = -150;
     }
       
     if (cursors.right.isDown) {
       right = true;
       
-      socket.emit('move', 'x ' + 150 + ' ' + mUID);
-      player[mUID].body.velocity.x = 150;
+      if (player[mUID].body.velocity.x != 150) socket.emit('move', 'x ' + 150 + ' ' + mUID);
+      if (player[mUID].body.velocity.x != 150) player[mUID].body.velocity.x = 150;
     }
 
     if (cursors.up.isDown && !up) {
       up = true;
 
-      socket.emit('move', 'y ' + -350 + ' ' + mUID);
-      player[mUID].body.velocity.y = -350;
+      if (player[mUID].body.velocity.y != -350) socket.emit('move', 'y ' + -350 + ' ' + mUID);
+      if (player[mUID].body.velocity.y != -350) player[mUID].body.velocity.y = -350;
     }
   }
 }
