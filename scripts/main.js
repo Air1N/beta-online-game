@@ -170,6 +170,7 @@ function Input() {
   socket.on('userDisconnect', function(UserID) {
     player[UserID].destroy();
     player.splice(UserID, 1);
+    if (UserID < mUID) mUID--;
   });
 
   function getCookie(cname) {
