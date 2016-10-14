@@ -151,10 +151,9 @@ function Input() {
   
   socket.on('move', function(data) {
     var ID = parseInt(data.split(' ')[2]);
-    //console.log(ID)
     var SPEED  = parseInt(data.split(' ')[1]);
     var DIR = data.split(' ')[0];
-    console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
+    //console.log('mUID: ' + mUID +' ID: ' + ID + ' SPEED: ' + SPEED + ' DIR: ' + DIR);
     if (parseInt(ID) != parseInt(mUID) && DIR == "x") player[ID].body.velocity.x = SPEED;
     if (parseInt(ID) != parseInt(mUID) && DIR == "y") player[ID].body.velocity.y = SPEED;
   });
