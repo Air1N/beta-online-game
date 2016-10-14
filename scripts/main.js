@@ -87,6 +87,7 @@ var socket = io();
       setInterval(Input, 1000/30);
     }
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
+    console.log(player[mUID].position.x + " // " + player[mUID].position.y)
   });
   
   function openChat() {
