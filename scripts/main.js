@@ -80,10 +80,10 @@ var socket = io();
     UserID = data.UserID;
 
     if (mUID === undefined) mUID = UserID;
-      for (i = 0; i < UserID; i++) {
-       if (player[i] == null) player[i] = {position: {x: 0, y: 0}};
-      }
-      console.log(mUID + " // " + lUID)
+    for (i = 0; i <= lUID; i++) {
+      if (player[i] == null) player[i] = {position: {x: 0, y: 0}};
+    }
+    console.log(mUID + " // " + lUID)
     socket.emit('updatePos', player[mUID].position.x + ' ' + player[mUID].position.y + ' ' + mUID);
     console.log(player[mUID].position.x + " // " + player[mUID].position.y)
   });
