@@ -47,6 +47,10 @@ io.on('connection', function (socket) {
 	socket.on('move', function (data) {
 		io.emit('move', data);
 	});
+	
+	socket.on('spawnBird', function (data) {
+		io.emit('spawnBird', data);
+	});
 });
 
 http.listen(port, function () {
