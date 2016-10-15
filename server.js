@@ -51,6 +51,10 @@ io.on('connection', function (socket) {
 	socket.on('spawnBird', function (data) {
 		io.emit('spawnBird', data);
 	});
+	
+	socket.on('moveCursor', function (data) {
+		io.emit('moveCursor', data);
+	});
 });
 
 http.listen(port, function () {
