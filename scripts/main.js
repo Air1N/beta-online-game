@@ -62,10 +62,10 @@ function update() {
 	}
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
-	cursor[mUID].x = mouseX;
-	cursor[mUID].y = mouseY;
+	cursor[mUID].x = mouseX - 20;
+	cursor[mUID].y = mouseY - 20;
 	
-	socket.emit('moveCursor', {x: mouseX, y: mouseY, ID: mUID})
+	socket.emit('moveCursor', {x: mouseX - 20, y: mouseY - 20, ID: mUID})
 	Input();
 }
 
