@@ -201,8 +201,8 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.collideWorldBounds = false;
 	
-	bird[bird.length - 1].body.velocity.x = data.dirX * 50;
-	bird[bird.length - 1].body.velocity.y = data.dirY * -50;
+	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
+	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
 	
 	//console.log(bird[bird.length - 1]);
 });
