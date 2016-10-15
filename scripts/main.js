@@ -1,5 +1,4 @@
 var socket = io();
-var bird = [];
 var mUID;
 var left = false;
 var right = false;
@@ -8,6 +7,7 @@ var lUID = 0;
 var isChatOpen = false;
 var chatFade = 0;
 var bird = [];
+var cursor = [];
 var game = new Phaser.Game(800, 400, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -109,10 +109,6 @@ function closeChat() {
 		setTimeout(closeChat, 1000 / 100);
 	}
 }
-
-setInterval(function() {
-	//socket.emit('lagComp', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y, time: new Date()});
-}, 1000 / 20);
 
 function Input() {
 	if (cursors) {
