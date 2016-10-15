@@ -60,6 +60,12 @@ function update() {
 	for (i = 0; i <= lUID; i++) {
 		game.physics.arcade.collide(bird[i], platforms);
 	}
+	var mouseX = game.input.mousePointer.x;
+	var mouseY = game.input.mousePointer.y;
+	cursor[mUID].x = mouseX;
+	cursor[mUID].y = mouseY;
+	
+	socket.emit('moveCursor', {x: mouseX, y: mouseY, ID: mUID})
 	Input();
 }
 
@@ -162,15 +168,6 @@ function spawnBirds() {
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
 spawnBirds();
-
-window.onmousemove = function(e) {
-	var mouseX = game.input.mousePointer.x;
-	var mouseY = game.input.mousePointer.y;
-	cursor[mUID].x = mouseX;
-	cursor[mUID].y = mouseY;
-	
-	socket.emit('moveCursor', {x: mouseX, y: mouseY, ID: mUID})
-}
 
 
 socket.on('move', function (data) {
