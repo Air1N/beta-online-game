@@ -46,13 +46,13 @@ function create() {
 }
 
 function loadSprite(i) {
-	var plx = bird[i].position.x;
-	var ply = bird[i].position.y;
-	bird[i] = game.add.sprite(plx, ply, 'ariLUL');
-	game.physics.arcade.enable(bird[i]);
-	bird[i].body.bounce.y = 0.2;
-	bird[i].body.gravity.y = 0;
-	bird[i].body.collideWorldBounds = false;
+	var plx = cursor[i].position.x;
+	var ply = cursor[i].position.y;
+	cursor[i] = game.add.sprite(plx, ply, 'ariLUL');
+	game.physics.arcade.enable(cursor[i]);
+	cursor[i].body.bounce.y = 0.2;
+	cursor[i].body.gravity.y = 0;
+	cursor[i].body.collideWorldBounds = true;
 }
 
 function update() {
@@ -80,8 +80,8 @@ socket.on('userConnect', function (data) {
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
-		if (bird[i] == null) {
-			bird[i] = {
+		if (cursor[i] == null) {
+			cursor[i] = {
 				position : {
 					x : 0,
 					y : 0
@@ -90,7 +90,7 @@ socket.on('userConnect', function (data) {
 			loadSprite(i);
 		}
 	}
-	socket.emit('updatePos', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y});
+	socket.emit('updatePos', {ID: mUID, x: cursor[mUID].position.x, y: cursor[mUID].position.y});
 });
 
 function openChat() {
@@ -203,8 +203,11 @@ socket.on('spawnBird', function (data) {
 	
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
-	
-	//console.log(bird[bird.length - 1]);
+});
+
+socket.on('moveCursor', function (data) {
+	cursor[data.ID].x = data.x;
+	cursor[data.ID].y = data.y;
 });
 
 
