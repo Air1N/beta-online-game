@@ -1,5 +1,5 @@
 var socket = io();
-var player = [];
+var bird = [];
 var mUID;
 var left = false;
 var right = false;
@@ -46,18 +46,18 @@ function create() {
 }
 
 function loadSprite(i) {
-	var plx = player[i].position.x;
-	var ply = player[i].position.y;
-	player[i] = game.add.sprite(plx, ply, 'ariLUL');
-	game.physics.arcade.enable(player[i]);
-	player[i].body.bounce.y = 0.2;
-	player[i].body.gravity.y = 600;
-	player[i].body.collideWorldBounds = true;
+	var plx = bird[i].position.x;
+	var ply = bird[i].position.y;
+	bird[i] = game.add.sprite(plx, ply, 'ariLUL');
+	game.physics.arcade.enable(bird[i]);
+	bird[i].body.bounce.y = 0.2;
+	bird[i].body.gravity.y = 0;
+	bird[i].body.collideWorldBounds = false;
 }
 
 function update() {
 	for (i = 0; i <= lUID; i++) {
-		game.physics.arcade.collide(player[i], platforms);
+		game.physics.arcade.collide(bird[i], platforms);
 	}
 	
 	Input();
@@ -81,8 +81,8 @@ socket.on('userConnect', function (data) {
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
-		if (player[i] == null) {
-			player[i] = {
+		if (bird[i] == null) {
+			bird[i] = {
 				position : {
 					x : 0,
 					y : 0
@@ -91,7 +91,7 @@ socket.on('userConnect', function (data) {
 			loadSprite(i);
 		}
 	}
-	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y});
+	socket.emit('updatePos', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y});
 });
 
 function openChat() {
@@ -110,90 +110,104 @@ function closeChat() {
 	}
 }
 
-function compLag(data) {
-	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].body.velocity.x = player[data.ID].body.velocity.x + parseInt(data.x - player[data.ID].x) / 10;
-        //player[data.ID].body.velocity.y = player[data.ID].body.velocity.y + parseInt(data.y - player[data.ID].y) / 10;
-	}
-}
-
-
-
 setInterval(function() {
-	socket.emit('lagComp', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
+	socket.emit('lagComp', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y, time: new Date()});
 }, 1000 / 20);
 
 function Input() {
 	if (cursors) {
-		if (d.isUp && a.isUp) {
-			if (player[mUID].body.velocity.x != 0)
+		/*if (d.isUp && a.isUp) {
+			if (bird[mUID].body.velocity.x != 0)
 				socket.emit('move', {ID: mUID, x: 0, time: new Date()});
-			if (player[mUID].body.velocity.x != 0)
-				player[mUID].body.velocity.x = 0;
+			if (bird[mUID].body.velocity.x != 0)
+				bird[mUID].body.velocity.x = 0;
 
 			left = false;
 			right = false;
 		}
 
-		if (player[mUID].body.touching.down)
+		if (bird[mUID].body.touching.down)
 			up = false;
 
 		if (a.isDown) {
 			left = true;
 
-			if (player[mUID].body.velocity.x != -150)
+			if (bird[mUID].body.velocity.x != -150)
 				socket.emit('move', {ID: mUID, x: -150, time: new Date()});
-			if (player[mUID].body.velocity.x != -150)
-				player[mUID].body.velocity.x = -150;
+			if (bird[mUID].body.velocity.x != -150)
+				bird[mUID].body.velocity.x = -150;
 		}
 
 		if (d.isDown) {
 			right = true;
 
-			if (player[mUID].body.velocity.x != 150)
+			if (bird[mUID].body.velocity.x != 150)
 				socket.emit('move', {ID: mUID, x: 150, time: new Date()});
-			if (player[mUID].body.velocity.x != 150)
-				player[mUID].body.velocity.x = 150;
+			if (bird[mUID].body.velocity.x != 150)
+				bird[mUID].body.velocity.x = 150;
 		}
 
 		if (w.isDown && !up) {
 			up = true;
 
-			if (player[mUID].body.velocity.y != -350)
+			if (bird[mUID].body.velocity.y != -350)
 				socket.emit('move', {ID: mUID, y: -350, time: new Date()});
-			if (player[mUID].body.velocity.y != -350)
-				player[mUID].body.velocity.y = -350;
-		}
+			if (bird[mUID].body.velocity.y != -350)
+				bird[mUID].body.velocity.y = -350;
+		}*/
+		
+		
+		
 	}
 }
+
+function spawnBird() {
+	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1})
+	setTimeout(spawnBird, 10000 * Math.random());
+}
+spawnBird();
+
+
+
 
 socket.on('move', function (data) {
 		var timeDiff = new Date() - data.time;
 		
-		if (data.x != null) player[data.ID].body.velocity.x = data.x;
-		if (data.y != null) player[data.ID].body.velocity.y = data.y;
+		if (data.x != null) bird[data.ID].body.velocity.x = data.x;
+		if (data.y != null) bird[data.ID].body.velocity.y = data.y;
 		
-		if (data.x != null) player[data.ID].movex = data.x;
-		if (data.y != null) player[data.ID].movey = data.y;
+		if (data.x != null) bird[data.ID].movex = data.x;
+		if (data.y != null) bird[data.ID].movey = data.y;
 });
 
 socket.on('lagComp', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
-        player[data.ID].y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
+		bird[data.ID].x = bird[data.ID].movex + parseInt(data.x - bird[data.ID].x) / 50;
 	}
 });
 
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		player[data.ID].x = data.x;
-        player[data.ID].y = data.y;
+		bird[data.ID].x = data.x;
+        bird[data.ID].y = data.y;
 	}
 });
 
+socket.on('spawnBird', function (data) {
+	bird[bird.length] = game.add.sprite(data.x, data.y, 'ariLUL');
+	game.physics.arcade.enable(bird[bird.length - 1]);
+	bird[bird.length - 1].body.bounce.y = 0.2;
+	bird[bird.length - 1].body.gravity.y = 0;
+	bird[bird.length - 1].body.collideWorldBounds = false;
+	
+	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
+	bird[bird.length - 1].body.velocity.y = data.dirY * 150;
+});
+
+
 socket.on('userDisconnect', function (UserID) {
-	player[UserID].destroy();
-	player.splice(UserID, 1);
+	bird[UserID].destroy();
+	bird.splice(UserID, 1);
 	if (UserID < mUID)
 		mUID--;
 	lUID--;
