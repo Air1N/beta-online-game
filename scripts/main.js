@@ -110,7 +110,7 @@ function closeChat() {
 }
 
 setInterval(function() {
-	socket.emit('lagComp', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y, time: new Date()});
+	//socket.emit('lagComp', {ID: mUID, x: bird[mUID].position.x, y: bird[mUID].position.y, time: new Date()});
 }, 1000 / 20);
 
 function Input() {
@@ -161,14 +161,16 @@ function Input() {
 }
 
 function spawnBirds() {
-	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1})
+	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1});
 	setTimeout(spawnBirds, 10000 * Math.random());
 	
 	console.log("Bird Spawned")
 }
 spawnBirds();
 
-
+window.onmousemove = function(e) {
+	socket.emit('moveCursor', {x: e.clientX, y: e.clientY})
+}
 
 
 socket.on('move', function (data) {
