@@ -59,8 +59,6 @@ function update() {
 	for (i = 0; i <= lUID; i++) {
 		game.physics.arcade.collide(bird[i], platforms);
 	}
-	console.log("-- Stuff --")
-	console.log(bird[bird.length - 1]);
 	Input();
 }
 
@@ -206,7 +204,7 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.velocity.x = data.dirX * 50;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -50;
 	
-	console.log(bird[bird.length - 1]);
+	//console.log(bird[bird.length - 1]);
 });
 
 
