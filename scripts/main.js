@@ -29,6 +29,10 @@ function preload() {
 
 function create() {
 	cursors = game.input.keyboard.createCursorKeys();
+	w = game.input.keyboard.addKey(Phaser.Keyboard.W);
+	s = game.input.keyboard.addKey(Phaser.Keyboard.S);
+	a = game.input.keyboard.addKey(Phaser.Keyboard.A);
+	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	platforms = game.add.group();
 	platforms.enableBody = true;
