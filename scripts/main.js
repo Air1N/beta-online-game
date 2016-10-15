@@ -105,6 +105,8 @@ function openChat() {
 		chatFade += 0.05;
 		document.getElementById("chatBox").style.opacity = chatFade;
 		setTimeout(openChat, 1000 / 100);
+		document.getElementById("removeChat").style.width = "100%";
+		document.getElementById("removeChat").style.height = "100%";
 	}
 }
 
@@ -113,6 +115,8 @@ function closeChat() {
 		chatFade -= 0.05;
 		document.getElementById("chatBox").style.opacity = chatFade;
 		setTimeout(closeChat, 1000 / 100);
+		document.getElementById("removeChat").style.width = "0%";
+		document.getElementById("removeChat").style.height = "0%";
 	}
 }
 
