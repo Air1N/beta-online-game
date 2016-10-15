@@ -125,7 +125,7 @@ setInterval(function() {
 
 function Input() {
 	if (cursors) {
-		if (cursors.d.isUp && cursors.a.isUp) {
+		if (d.isUp && a.isUp) {
 			if (player[mUID].body.velocity.x != 0)
 				socket.emit('move', {ID: mUID, x: 0, time: new Date()});
 			if (player[mUID].body.velocity.x != 0)
@@ -138,7 +138,7 @@ function Input() {
 		if (player[mUID].body.touching.down)
 			up = false;
 
-		if (cursors.a.isDown) {
+		if (a.isDown) {
 			left = true;
 
 			if (player[mUID].body.velocity.x != -150)
@@ -147,7 +147,7 @@ function Input() {
 				player[mUID].body.velocity.x = -150;
 		}
 
-		if (cursors.d.isDown) {
+		if (d.isDown) {
 			right = true;
 
 			if (player[mUID].body.velocity.x != 150)
@@ -156,7 +156,7 @@ function Input() {
 				player[mUID].body.velocity.x = 150;
 		}
 
-		if (cursors.w.isDown && !up) {
+		if (w.isDown && !up) {
 			up = true;
 
 			if (player[mUID].body.velocity.y != -350)
