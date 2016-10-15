@@ -192,7 +192,6 @@ socket.on('updatePos', function (data) {
 });
 
 socket.on('spawnBird', function (data) {
-	console.log(bird)
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'ariLUL');
 	game.physics.arcade.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.bounce.y = 0.2;
