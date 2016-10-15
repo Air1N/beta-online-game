@@ -164,7 +164,7 @@ function Input() {
 }
 
 function spawnBirds() {
-	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1});
+	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.5});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
 spawnBirds();
