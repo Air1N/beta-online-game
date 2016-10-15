@@ -7,6 +7,7 @@ var up = false;
 var lUID = 0;
 var isChatOpen = false;
 var chatFade = 0;
+var bird = [];
 var game = new Phaser.Game(800, 400, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -163,8 +164,6 @@ function Input() {
 function spawnBirds() {
 	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1});
 	setTimeout(spawnBirds, 10000 * Math.random());
-	
-	console.log("Bird Spawned")
 }
 spawnBirds();
 
