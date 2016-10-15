@@ -165,6 +165,7 @@ spawnBirds();
 
 window.onmousemove = function(e) {
 	socket.emit('moveCursor', {x: e.clientX, y: e.clientY})
+	console.log(e.clientX + " // 2 // " + e.clientY);
 }
 
 
@@ -205,6 +206,8 @@ socket.on('spawnBird', function (data) {
 socket.on('moveCursor', function (data) {
 	cursor[data.ID].x = data.x;
 	cursor[data.ID].y = data.y;
+	
+	console.log(data.x + " // " + data.y)
 });
 
 
