@@ -161,13 +161,13 @@ function Input() {
 	}
 }
 
-function spawnBird() {
+function spawnBirds() {
 	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.1})
-	setTimeout(spawnBird, 10000 * Math.random());
+	setTimeout(spawnBirds, 10000 * Math.random());
 	
 	console.log("Bird Spawned")
 }
-spawnBird();
+spawnBirds();
 
 
 
