@@ -166,6 +166,9 @@ spawnBirds();
 window.onmousemove = function(e) {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
+	cursor[mUID].x = mouseX;
+	cursor[mUID].y = mouseY;
+	
 	socket.emit('moveCursor', {x: mouseX, y: mouseY, ID: mUID})
 }
 
@@ -205,10 +208,10 @@ socket.on('spawnBird', function (data) {
 });
 
 socket.on('moveCursor', function (data) {
-	cursor[data.ID].x = data.x;
-	cursor[data.ID].y = data.y;
-	
-	console.log(data.x + " // " + data.y)
+	if (parseInt(data.ID) != parseInt(mUID)) {
+		cursor[data.ID].x = data.x;
+		cursor[data.ID].y = data.y;
+	}
 });
 
 
