@@ -58,7 +58,7 @@ function loadSprite(i) {
 
 function update() {
 	for (i = 0; i <= lUID; i++) {
-		game.physics.arcade.collide(bird[i], platforms);
+		//game.physics.arcade.collide(bird[i], platforms);
 	}
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
