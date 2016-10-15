@@ -60,13 +60,16 @@ function update() {
 	for (i = 0; i <= lUID; i++) {
 		//game.physics.arcade.collide(bird[i], platforms);
 	}
+	Input();
+}
+
+window.onmousemove = function() {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
 	cursor[mUID].x = mouseX - 20;
 	cursor[mUID].y = mouseY - 20;
 	
 	socket.emit('moveCursor', {x: mouseX - 20, y: mouseY - 20, ID: mUID})
-	Input();
 }
 
 function toggleChat() {
