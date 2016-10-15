@@ -164,8 +164,9 @@ function spawnBirds() {
 spawnBirds();
 
 window.onmousemove = function(e) {
-	socket.emit('moveCursor', {x: e.clientX, y: e.clientY})
-	console.log(e.clientX + " // 2 // " + e.clientY);
+	var mouseX = e.clientX;
+	var mouseY = e.clientY;
+	socket.emit('moveCursor', {x: mouseX, y: mouseY, ID: mUID})
 }
 
 
