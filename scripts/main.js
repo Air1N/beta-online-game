@@ -116,12 +116,12 @@ function compLag(data) {
 
 
 setInterval(function() {
-	socket.emit('updatePos', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
+	socket.emit('lagComp', {ID: mUID, x: player[mUID].position.x, y: player[mUID].position.y, time: new Date()});
 }, 1000 / 20);
 
 function Input() {
 	if (cursors) {
-		if (cursors.right.isUp && cursors.left.isUp) {
+		if (cursors.d.isUp && cursors.a.isUp) {
 			if (player[mUID].body.velocity.x != 0)
 				socket.emit('move', {ID: mUID, x: 0, time: new Date()});
 			if (player[mUID].body.velocity.x != 0)
@@ -134,7 +134,7 @@ function Input() {
 		if (player[mUID].body.touching.down)
 			up = false;
 
-		if (cursors.left.isDown) {
+		if (cursors.a.isDown) {
 			left = true;
 
 			if (player[mUID].body.velocity.x != -150)
@@ -143,7 +143,7 @@ function Input() {
 				player[mUID].body.velocity.x = -150;
 		}
 
-		if (cursors.right.isDown) {
+		if (cursors.d.isDown) {
 			right = true;
 
 			if (player[mUID].body.velocity.x != 150)
@@ -152,7 +152,7 @@ function Input() {
 				player[mUID].body.velocity.x = 150;
 		}
 
-		if (cursors.up.isDown && !up) {
+		if (cursors.w.isDown && !up) {
 			up = true;
 
 			if (player[mUID].body.velocity.y != -350)
@@ -173,10 +173,17 @@ socket.on('move', function (data) {
 		if (data.y != null) player[data.ID].movey = data.y;
 });
 
+socket.on('lagComp', function (data) {
+	if (parseInt(data.ID) != parseInt(mUID)) {
+		player[data.ID].x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
+        player[data.ID].y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
+	}
+});
+
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		if (player[data.ID].movex != null) player[data.ID].body.velocity.x = player[data.ID].movex + parseInt(data.x - player[data.ID].x) / 50;
-        if (player[data.ID].movey != null) player[data.ID].body.velocity.y = player[data.ID].movey + parseInt(data.y - player[data.ID].y) / 50;
+		player[data.ID].x = data.x;
+        player[data.ID].y = data.y;
 	}
 });
 
