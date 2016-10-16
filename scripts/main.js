@@ -55,7 +55,7 @@ function loadSprite(i) {
 	game.physics.arcade.enable(cursor[i]);
 	cursor[i].body.bounce.y = 1;
 	cursor[i].body.gravity.y = 0;
-	cursor[i].body.collideWorldBounds = true;
+	cursor[i].body.collideWorldBounds = false;
 	cursor[i].tint = Math.random() * 0xffffff;
 	cursor[i].scale.setTo(0.75, 0.75);
 }
