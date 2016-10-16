@@ -56,7 +56,7 @@ function loadSprite(i) {
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
 	cursor[i].tint = Math.random() * 0xffffff;
-	cursor[i].scale(0.5, 0.5);
+	cursor[i].scale(0.25, 0.25);
 }
 
 function update() {
@@ -75,8 +75,8 @@ function update() {
 window.onmousemove = function () {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
-	cursor[mUID].x = mouseX - 4;
-	cursor[mUID].y = mouseY - 4;
+	cursor[mUID].x = mouseX - 8;
+	cursor[mUID].y = mouseY - 8;
 	
 	
 	socket.emit('moveCursor', {
