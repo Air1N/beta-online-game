@@ -90,17 +90,10 @@ window.onmousemove = function () {
 
 window.onclick = function() {
 	for (i = 0; i < bird.length; i++) {
-		bird[i].index = i;
-	}
-	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
-	console.log(overlap)
-	console.log(overlap[0])
-	for (i = 0; i < bird.length; i++) {
-		if (overlap[0].index == bird[i].index) {
-			bird[i].kill();
-			bird.splice(i, 1);
-			socket.emit('birdKill', {ID: i, UID: mUID});
-		}
+		overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird[i]);
+		//bird[i].kill();
+		//bird.splice(i, 1);
+		//socket.emit('birdKill', {ID: i, UID: mUID});
 	}
 	
 	//game.physics.p2.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
@@ -217,7 +210,7 @@ socket.on('spawnBird', function (data) {
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
-	bird[bird.length - 1].rotation = bird[bird.length - 1].body.angle;
+	bird[bird.length - 1].body.rotation = bird[bird.length - 1].body.angle;
 	bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
