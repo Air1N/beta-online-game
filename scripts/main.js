@@ -63,7 +63,7 @@ function loadSprite(i) {
 
 function update() {
 	for (i = 0; i < bird.length; i++) {
-		bird[bird.length - 1].body.thrust(100);
+		bird[i].body.thrust(100);
 		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
 			bird[i].destroy();
 			bird.splice(i, 1);
