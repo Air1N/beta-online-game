@@ -75,8 +75,8 @@ function update() {
 window.onmousemove = function () {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
-	cursor[mUID].x = mouseX - 4;
-	cursor[mUID].y = mouseY - 4;
+	cursor[mUID].x = mouseX;
+	cursor[mUID].y = mouseY;
 	
 	
 	socket.emit('moveCursor', {
