@@ -88,7 +88,7 @@ window.onmousemove = function () {
 
 window.onclick = function() {
 	for (i = 0; i < bird.length; i++) {
-		game.physics.arcade.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); }, null, this);
+		game.physics.arcade.overlap(cursor[mUID], bird[i], function(){ socket.emit('birdKill', i) }, null, this);
 	}
 }
 
@@ -176,6 +176,12 @@ socket.on('move', function (data) {
 		bird[data.ID].movey = data.y;
 });
 
+socket.on('birdKill', function (i) {
+	bird[i].kill();
+	bird.splice(i, 1);
+});
+
+
 socket.on('lagComp', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
 		bird[data.ID].x = bird[data.ID].movex + parseInt(data.x - bird[data.ID].x) / 50;
@@ -208,7 +214,7 @@ socket.on('moveCursor', function (data) {
 });
 
 socket.on('userDisconnect', function (UserID) {
-	bird[UserID].destroy();
+	bird[UserID].kill();
 	bird.splice(UserID, 1);
 	if (UserID < mUID)
 		mUID--;
