@@ -10,6 +10,7 @@ var allClients = [];
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
+app.use('/lib', express.static(__dirname + '/lib'));
 
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
