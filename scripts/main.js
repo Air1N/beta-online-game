@@ -36,6 +36,7 @@ function create() {
 	a = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
+	game.physics.startSystem(Phaser.Physics.P2JS);
 	platforms = game.add.group();
 	platforms.enableBody = true;
 	var ground = platforms.create(-200, game.world.height - 64, 'bird');
@@ -50,7 +51,6 @@ function create() {
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
 	var ply = cursor[i].position.y;
-	//if (cursor[i].kill()) cursor[i].kill();
 	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
 	game.physics.arcade.enable(cursor[i]);
 	cursor[i].body.bounce.y = 1;
@@ -200,7 +200,7 @@ socket.on('updatePos', function (data) {
 
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
-	game.physics.arcade.enable(bird[bird.length - 1]);
+	game.physics.p2.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.collideWorldBounds = false;
