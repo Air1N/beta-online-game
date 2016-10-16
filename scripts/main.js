@@ -51,14 +51,14 @@ function loadSprite(i) {
 	var ply = cursor[i].position.y;
 	cursor[i] = game.add.sprite(plx, ply, 'ariLUL');
 	game.physics.arcade.enable(cursor[i]);
-	cursor[i].body.bounce.y = 0.2;
+	cursor[i].body.bounce.y = 1;
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
 }
 
 function update() {
 	for (i = 0; i <= lUID; i++) {
-		//game.physics.arcade.collide(bird[i], platforms);
+		game.physics.arcade.collide(cursor[i], platforms);
 	}
 	Input();
 }
@@ -125,48 +125,6 @@ function closeChat() {
 
 function Input() {
 	if (cursors) {
-		/*if (d.isUp && a.isUp) {
-			if (bird[mUID].body.velocity.x != 0)
-				socket.emit('move', {ID: mUID, x: 0, time: new Date()});
-			if (bird[mUID].body.velocity.x != 0)
-				bird[mUID].body.velocity.x = 0;
-
-			left = false;
-			right = false;
-		}
-
-		if (bird[mUID].body.touching.down)
-			up = false;
-
-		if (a.isDown) {
-			left = true;
-
-			if (bird[mUID].body.velocity.x != -150)
-				socket.emit('move', {ID: mUID, x: -150, time: new Date()});
-			if (bird[mUID].body.velocity.x != -150)
-				bird[mUID].body.velocity.x = -150;
-		}
-
-		if (d.isDown) {
-			right = true;
-
-			if (bird[mUID].body.velocity.x != 150)
-				socket.emit('move', {ID: mUID, x: 150, time: new Date()});
-			if (bird[mUID].body.velocity.x != 150)
-				bird[mUID].body.velocity.x = 150;
-		}
-
-		if (w.isDown && !up) {
-			up = true;
-
-			if (bird[mUID].body.velocity.y != -350)
-				socket.emit('move', {ID: mUID, y: -350, time: new Date()});
-			if (bird[mUID].body.velocity.y != -350)
-				bird[mUID].body.velocity.y = -350;
-		}*/
-		
-		
-		
 	}
 }
 
