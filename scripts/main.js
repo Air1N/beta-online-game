@@ -30,6 +30,7 @@ function preload() {
 }
 
 function create() {
+	game.renderer.renderSession.roundPixels = true;
 	cursors = game.input.keyboard.createCursorKeys();
 	w = game.input.keyboard.addKey(Phaser.Keyboard.W);
 	s = game.input.keyboard.addKey(Phaser.Keyboard.S);
