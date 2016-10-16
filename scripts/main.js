@@ -95,13 +95,9 @@ window.onclick = function() {
 	}
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
 	for (j = 0; j < overlap.length; j++) {
-		for (i = 0; i < bird.length; i++) {
-			if (overlap[j].parent.sprite.index == bird[i].index) {
-				bird[i].destroy();
-				bird.splice(i, 1);
-				socket.emit('birdKill', {ID: i, UID: mUID});
-			}
-		}
+		bird[overlap[j].parent.sprite.index].destroy();
+		bird.splice(overlap[j].parent.sprite.index, 1);
+		socket.emit('birdKill', {ID: overlap[j].parent.sprite.index, UID: mUID});
 	}
 }
 
@@ -216,7 +212,6 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
-	//console.log("Fuck!")
 });
 
 socket.on('moveCursor', function (data) {
