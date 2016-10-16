@@ -90,7 +90,7 @@ window.onmousemove = function () {
 
 window.onclick = function() {
 	for (i = 0; i < bird.length; i++) {
-		game.physics.arcade.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
+		game.physics.p2.hitTest(pointer.position, bird[i]);cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
 	}
 }
 
@@ -205,7 +205,6 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.collideWorldBounds = false;
-	
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
 	bird[i].rotation = bird[i].body.angle;
