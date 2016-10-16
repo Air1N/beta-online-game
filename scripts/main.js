@@ -56,7 +56,7 @@ function loadSprite(i) {
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
 	cursor[i].tint = Math.random() * 0xffffff;
-	cursor[i].scale.setTo(0.5, 0.5);
+	cursor[i].scale.setTo(0.75, 0.75);
 }
 
 function update() {
@@ -84,6 +84,12 @@ window.onmousemove = function () {
 		y : mouseY - 20,
 		ID : mUID
 	})
+}
+
+window.onclick = function() {
+	for (i = 0; i < bird.length; i++) {
+		game.physics.arcade.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); }, null, this);
+	}
 }
 
 function toggleChat() {
