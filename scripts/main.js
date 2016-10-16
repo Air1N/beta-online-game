@@ -205,9 +205,10 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.collideWorldBounds = false;
-
+	
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
+	if (bird[bird.length - 1].body.velocity.x <= 0) bird[bird.length - 1].scale.setTo(-1, -1);
 });
 
 socket.on('moveCursor', function (data) {
