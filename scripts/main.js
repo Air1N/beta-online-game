@@ -166,9 +166,7 @@ function Input() {
 function spawnBirds() {
 	socket.emit('spawnBird', {
 		x : Math.random() * 800,
-		y : 400,
-		dirX : Math.random() - 0.5,
-		dirY : Math.random() + 0.5
+		y : 400
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
@@ -213,10 +211,10 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	bird[bird.length - 1].index = bird.length - 1;
 	game.physics.p2.enable(bird[bird.length - 1], true);
-	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
-	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
-	bird[bird.length - 1].body.rotation = 3 / (data.dirX * 3 + data.dirY)
-	bird[bird.length - 1].scale.setTo(1, -1);
+	bird[bird.length - 1].body.angle = (Math.random() * 160) + 10
+	bird[bird.length - 1].sprite.body.thrust(Math.random() * 100);
+	bird[bird.length - 1].kinematic = true;
+	if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
 
