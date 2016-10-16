@@ -201,14 +201,14 @@ socket.on('updatePos', function (data) {
 
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
-	game.physics.p2.enable(bird[bird.length - 1], true);
+	game.physics.p2.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
-	bird[bird.length - 1].body.collideWorldBounds = false;
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
 	bird[i].rotation = bird[i].body.angle;
 	bird[bird.length - 1].scale.setTo(1, -1);
+	bird[bird.length - 1].body.collideWorldBounds = false;
 });
 
 socket.on('moveCursor', function (data) {
