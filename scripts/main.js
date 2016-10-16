@@ -18,7 +18,7 @@ var gameState = "";
 
 function preload() {
 	game.stage.disableVisibilityChange = true;
-	game.load.image('ariLUL', '/assets/ariLUL.png');
+	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
 	
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -38,7 +38,7 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	platforms = game.add.group();
 	platforms.enableBody = true;
-	var ground = platforms.create(-200, game.world.height - 64, 'ariLUL');
+	var ground = platforms.create(-200, game.world.height - 64, 'bird');
 	ground.body.immovable = true;
 	ground.scale.setTo(50, 2);
 	gameState = "loaded";
@@ -199,7 +199,7 @@ socket.on('updatePos', function (data) {
 });
 
 socket.on('spawnBird', function (data) {
-	bird[bird.length] = game.add.sprite(data.x, data.y, 'ariLUL');
+	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	game.physics.arcade.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
