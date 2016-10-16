@@ -98,7 +98,7 @@ window.onclick = function() {
 	for (j = 0; j < overlap.length; j++) {
 		for (i = 0; i < bird.length; i++) {
 			if (overlap[j].parent.sprite.index == bird[i].index) {
-				bird[i].kill();
+				bird[i].destroy();
 				bird.splice(i, 1);
 				socket.emit('birdKill', {ID: i, UID: mUID});
 			}
