@@ -56,6 +56,10 @@ io.on('connection', function (socket) {
 	socket.on('moveCursor', function (data) {
 		io.emit('moveCursor', data);
 	});
+	
+	socket.on('birdKill', function (data) {
+		io.emit('birdKill', data);
+	});
 });
 
 http.listen(port, function () {
