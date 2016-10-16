@@ -209,7 +209,7 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].index = bird.length - 1;
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.angle = (Math.random() * 130) + 50;
-	bird[bird.length - 1].body.fixedRotation = true;
+	//bird[bird.length - 1].body.fixedRotation = true;
 	//if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
