@@ -56,7 +56,6 @@ function loadSprite(i) {
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
 	cursor[i].tint = Math.random() * 0xffffff;
-	cursor[i].z = -1;
 }
 
 function update() {
@@ -66,6 +65,7 @@ function update() {
 			bird.splice(i, 1);
 		}
 	}
+	cursor[i].z = bird.length + 2;
 	Input();
 }
 
