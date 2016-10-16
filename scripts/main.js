@@ -89,14 +89,13 @@ window.onmousemove = function () {
 }
 
 window.onclick = function() {
-	for (i = 0; i < bird.length; i++) {
-		if (game.physics.p2.hitTest(game.input.mousePointer.position, bird[i])) {
-			bird[i].kill()
-			bird.splice(i, 1);
-			socket.emit('birdKill', {ID: i, UID: mUID});
-		}
-		//game.physics.p2.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
+	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird) 
+	for (i = 0; i < overlap.length; i++) {
+		bird[overlap[i].index].kill()
+		bird.splice(overlap[i].index, 1);
+		socket.emit('birdKill', {ID: overlap[i].index, UID: mUID});
 	}
+	//game.physics.p2.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
 }
 
 function toggleChat() {
@@ -206,6 +205,7 @@ socket.on('updatePos', function (data) {
 
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
+	bird[bird.length - 1].index = bird.length - 1;
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
