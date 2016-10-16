@@ -60,9 +60,6 @@ function loadSprite(i) {
 }
 
 function update() {
-	for (i = 0; i <= lUID; i++) {
-		game.physics.arcade.collide(cursor[i], platforms);
-	}
 	for (i = 0; i < bird.length; i++) {
 		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
 			bird[i].destroy();
