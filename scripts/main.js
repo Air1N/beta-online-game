@@ -177,7 +177,7 @@ socket.on('move', function (data) {
 });
 
 socket.on('birdKill', function (data) {
-	if(data.UID != mUID)
+	if(data.UID != mUID) {
 		bird[data.ID].kill();
 		bird.splice(data.ID, 1);
 	}
