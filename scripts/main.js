@@ -90,10 +90,19 @@ window.onmousemove = function () {
 
 window.onclick = function() {
 	for (i = 0; i < bird.length; i++) {
-		overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird[i]);
-		//bird[i].kill();
-		//bird.splice(i, 1);
-		//socket.emit('birdKill', {ID: i, UID: mUID});
+		bird[i].index = i;
+	}
+	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
+	console.log(overlap)
+	console.log(overlap[0])
+	for (j = 0; j < overlap.length; j++) {
+		for (i = 0; i < bird.length; i++) {
+			if (overlap[j].parent.sprite.index == bird[i].index) {
+				bird[i].kill();
+				bird.splice(i, 1);
+				socket.emit('birdKill', {ID: i, UID: mUID});
+			}
+		}
 	}
 	
 	//game.physics.p2.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
