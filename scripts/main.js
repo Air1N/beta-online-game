@@ -213,8 +213,8 @@ socket.on('spawnBird', function (data) {
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.angle = (Math.random() * 160) + 10
 	bird[bird.length - 1].sprite.body.thrust(Math.random() * 100);
-	//bird[bird.length - 1].kinematic = true;
-	bird[bird.length - 1].fixedRotation = true;
+	bird[bird.length - 1].body.kinematic = true;
+	bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
