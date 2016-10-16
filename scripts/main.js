@@ -102,7 +102,7 @@ socket.on('userConnect', function (data) {
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
-		if (cursor[i] == null) {
+		if (cursor[i] == null && i != mUID) {
 			cursor[i] = {
 				position : {
 					x : 0,
