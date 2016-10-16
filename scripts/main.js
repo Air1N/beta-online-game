@@ -207,8 +207,6 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	bird[bird.length - 1].index = bird.length - 1;
 	game.physics.p2.enable(bird[bird.length - 1], true);
-	bird[bird.length - 1].body.bounce.y = 0.2;
-	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
 	bird[bird.length - 1].rotation = bird[bird.length - 1].body.angle;
