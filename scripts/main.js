@@ -214,11 +214,11 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.angle = (Math.random() * 160) + 10
 	bird[bird.length - 1].body.setZeroRotation();
 	bird[bird.length - 1].body.thrust(Math.random() * 100);
-	bird[bird.length - 1].body.kinematic = true;
+	//bird[bird.length - 1].body.kinematic = true;
 	bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
-	console.log("Fuck!")
+	//console.log("Fuck!")
 });
 
 socket.on('moveCursor', function (data) {
