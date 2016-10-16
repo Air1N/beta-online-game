@@ -63,8 +63,8 @@ function loadSprite(i) {
 
 function update() {
 	for (i = 0; i < bird.length; i++) {
-		bird[i].body.thrust(100);
-		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
+		if (bird[i] != null) bird[i].body.thrust(100);
+		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20 && bird[i] != null) {
 			bird[i].destroy();
 			bird.splice(i, 1);
 		}
@@ -91,13 +91,13 @@ window.onmousemove = function () {
 
 window.onclick = function() {
 	for (i = 0; i < bird.length; i++) {
-		bird[i].index = i;
+		if (bird[i] != null) bird[i].index = i;
 	}
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
 	for (j = 0; j < overlap.length; j++) {
-		bird[overlap[j].parent.sprite.index].destroy();
-		bird.splice(overlap[j].parent.sprite.index, 1);
-		socket.emit('birdKill', {ID: overlap[j].parent.sprite.index, UID: mUID});
+		if (bird[overlap[j].parent.sprite.index] != null) bird[overlap[j].parent.sprite.index].destroy();
+		if (bird[overlap[j].parent.sprite.index] != null) bird.splice(overlap[j].parent.sprite.index, 1);
+		if (bird[overlap[j].parent.sprite.index] != null) socket.emit('birdKill', {ID: overlap[j].parent.sprite.index, UID: mUID});
 	}
 }
 
