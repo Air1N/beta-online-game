@@ -50,7 +50,7 @@ function create() {
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
 	var ply = cursor[i].position.y;
-	if (cursor[i].kill()) cursor[i].kill();
+	//if (cursor[i].kill()) cursor[i].kill();
 	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
 	game.physics.arcade.enable(cursor[i]);
 	cursor[i].body.bounce.y = 1;
