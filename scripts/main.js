@@ -63,7 +63,7 @@ function loadSprite(i) {
 
 function update() {
 	for (i = 0; i < bird.length; i++) {
-		if (bird[i] != null) bird[i].body.thrust(100);
+		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
 		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20 && bird[i] != null) {
 			bird[i].destroy();
 			bird.splice(i, 1);
@@ -208,6 +208,7 @@ socket.on('updatePos', function (data) {
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	bird[bird.length - 1].index = bird.length - 1;
+	bird[bird.length - 1].speed = Math.random() * 150;
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.angle = (Math.random() * 180) - 90;
 	//bird[bird.length - 1].body.fixedRotation = true;
