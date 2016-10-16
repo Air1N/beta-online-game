@@ -19,7 +19,8 @@ var gameState = "";
 function preload() {
 	game.stage.disableVisibilityChange = true;
 	game.load.image('ariLUL', '/assets/ariLUL.png');
-
+	game.load.image('crosshair', '/assets/crosshair.png');
+	
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
@@ -49,12 +50,12 @@ function create() {
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
 	var ply = cursor[i].position.y;
-	cursor[i] = game.add.sprite(plx, ply, 'ariLUL');
+	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
 	game.physics.arcade.enable(cursor[i]);
 	cursor[i].body.bounce.y = 1;
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
-	
+
 	cursor[i].z = 1000;
 }
 
@@ -62,16 +63,26 @@ function update() {
 	for (i = 0; i <= lUID; i++) {
 		game.physics.arcade.collide(cursor[i], platforms);
 	}
+	for (i = 0; i < bird.length; i++) {
+		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
+			bird[i].destroy();
+			bird.splice(i, 1);
+		}
+	}
 	Input();
 }
 
-window.onmousemove = function() {
+window.onmousemove = function () {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
 	cursor[mUID].x = mouseX - 20;
 	cursor[mUID].y = mouseY - 20;
-	
-	socket.emit('moveCursor', {x: mouseX - 20, y: mouseY - 20, ID: mUID})
+
+	socket.emit('moveCursor', {
+		x : mouseX - 20,
+		y : mouseY - 20,
+		ID : mUID
+	})
 }
 
 function toggleChat() {
@@ -88,7 +99,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	
+
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
@@ -102,7 +113,11 @@ socket.on('userConnect', function (data) {
 			loadSprite(i);
 		}
 	}
-	socket.emit('updatePos', {ID: mUID, x: cursor[mUID].position.x, y: cursor[mUID].position.y});
+	socket.emit('updatePos', {
+		ID : mUID,
+		x : cursor[mUID].position.x,
+		y : cursor[mUID].position.y
+	});
 });
 
 function openChat() {
@@ -126,25 +141,32 @@ function closeChat() {
 }
 
 function Input() {
-	if (cursors) {
-	}
+	if (cursors) {}
 }
 
 function spawnBirds() {
-	socket.emit('spawnBird', {x: Math.random() * 800, y: 400, dirX: Math.random() - 0.5, dirY: Math.random() + 0.5});
+	socket.emit('spawnBird', {
+		x : Math.random() * 800,
+		y : 400,
+		dirX : Math.random() - 0.5,
+		dirY : Math.random() + 0.5
+	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
 spawnBirds();
 
-
 socket.on('move', function (data) {
-		var timeDiff = new Date() - data.time;
-		
-		if (data.x != null) bird[data.ID].body.velocity.x = data.x;
-		if (data.y != null) bird[data.ID].body.velocity.y = data.y;
-		
-		if (data.x != null) bird[data.ID].movex = data.x;
-		if (data.y != null) bird[data.ID].movey = data.y;
+	var timeDiff = new Date() - data.time;
+
+	if (data.x != null)
+		bird[data.ID].body.velocity.x = data.x;
+	if (data.y != null)
+		bird[data.ID].body.velocity.y = data.y;
+
+	if (data.x != null)
+		bird[data.ID].movex = data.x;
+	if (data.y != null)
+		bird[data.ID].movey = data.y;
 });
 
 socket.on('lagComp', function (data) {
@@ -156,7 +178,7 @@ socket.on('lagComp', function (data) {
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
 		bird[data.ID].x = data.x;
-        bird[data.ID].y = data.y;
+		bird[data.ID].y = data.y;
 	}
 });
 
@@ -166,7 +188,7 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.bounce.y = 0.2;
 	bird[bird.length - 1].body.gravity.y = 0;
 	bird[bird.length - 1].body.collideWorldBounds = false;
-	
+
 	bird[bird.length - 1].body.velocity.x = data.dirX * 300;
 	bird[bird.length - 1].body.velocity.y = data.dirY * -100;
 });
@@ -177,7 +199,6 @@ socket.on('moveCursor', function (data) {
 		cursor[data.ID].y = data.y;
 	}
 });
-
 
 socket.on('userDisconnect', function (UserID) {
 	bird[UserID].destroy();
