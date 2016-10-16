@@ -93,6 +93,8 @@ window.onclick = function() {
 		bird[i].index = i;
 	}
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
+	console.log(overlap)
+	console.log(overlap[0])
 	for (i = 0; i < bird.length; i++) {
 		if (overlap[0].index == bird[i].index) {
 			bird[i].kill();
