@@ -50,6 +50,7 @@ function create() {
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
 	var ply = cursor[i].position.y;
+	if (cursor[i].kill()) cursor[i].kill();
 	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
 	game.physics.arcade.enable(cursor[i]);
 	cursor[i].body.bounce.y = 1;
@@ -75,13 +76,13 @@ function update() {
 window.onmousemove = function () {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
-	cursor[mUID].x = mouseX - 6;
-	cursor[mUID].y = mouseY - 6;
+	cursor[mUID].x = mouseX - 12;
+	cursor[mUID].y = mouseY - 12;
 	
 	
 	socket.emit('moveCursor', {
-		x : mouseX - 6,
-		y : mouseY - 6,
+		x : mouseX - 12,
+		y : mouseY - 12,
 		ID : mUID
 	})
 }
