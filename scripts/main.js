@@ -93,8 +93,6 @@ window.onclick = function() {
 		bird[i].index = i;
 	}
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
-	console.log(overlap)
-	console.log(overlap[0])
 	for (j = 0; j < overlap.length; j++) {
 		for (i = 0; i < bird.length; i++) {
 			if (overlap[j].parent.sprite.index == bird[i].index) {
@@ -104,8 +102,6 @@ window.onclick = function() {
 			}
 		}
 	}
-	
-	//game.physics.p2.overlap(cursor[mUID], bird[i], function(){ bird[i].kill(); bird.splice(i, 1); socket.emit('birdKill', {ID: i, UID: mUID}); }, null, this);
 }
 
 function toggleChat() {
@@ -232,7 +228,7 @@ socket.on('moveCursor', function (data) {
 });
 
 socket.on('userDisconnect', function (UserID) {
-	cursor[UserID].kill();
+	cursor[UserID].destroy();
 	cursor.splice(UserID, 1);
 	if (UserID < mUID)
 		mUID--;
