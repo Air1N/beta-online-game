@@ -218,6 +218,7 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 90) bird[bird.length - 1].scale.setTo(1, -1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
+	console.log("Fuck!")
 });
 
 socket.on('moveCursor', function (data) {
