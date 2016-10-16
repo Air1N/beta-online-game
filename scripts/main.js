@@ -55,7 +55,7 @@ function loadSprite(i) {
 	cursor[i].body.bounce.y = 1;
 	cursor[i].body.gravity.y = 0;
 	cursor[i].body.collideWorldBounds = true;
-
+	cursor[i].tint = Math.random() * 0xffffff;
 	cursor[i].z = 1000;
 }
 
