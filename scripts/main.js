@@ -8,6 +8,7 @@ var isChatOpen = false;
 var chatFade = 0;
 var bird = [];
 var cursor = [];
+var points = [];
 var game = new Phaser.Game(800, 400, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -44,6 +45,11 @@ function create() {
 	ground.body.immovable = true;
 	ground.scale.setTo(50, 2);
 	gameState = "loaded";
+	
+	for (i = 0; i <= lUID; i++) {
+		loadSprite(i);
+	}
+	spawnBirds();
 }
 
 function loadSprite(i) {
@@ -57,7 +63,7 @@ function loadSprite(i) {
 function update() {
 	for (i = 0; i < bird.length; i++) {
 		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
-		if (bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20 && bird[i] != null) {
+		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
 			bird[i].destroy();
 			bird.splice(i, 1);
 		}
@@ -165,7 +171,6 @@ function spawnBirds() {
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
-spawnBirds();
 
 socket.on('move', function (data) {
 	var timeDiff = new Date() - data.time;
@@ -182,6 +187,7 @@ socket.on('move', function (data) {
 });
 
 socket.on('birdKill', function (data) {
+	points[data.UID]++;
 	if(data.UID != mUID) {
 		bird[data.ID].destroy();
 		bird.splice(data.ID, 1);
@@ -201,7 +207,6 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].speed = data.spd;
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.angle = data.angl;
-	//bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 0) bird[bird.length - 1].scale.setTo(-1, 1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
