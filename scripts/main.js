@@ -164,7 +164,7 @@ function spawnBirds() {
 	socket.emit('spawnBird', {
 		x : Math.random() * 1600,
 		y : 901,
-		spd: Math.random() * 150,
+		spd: (Math.random() * 100) + 50,
 		angl: (Math.random() * 180) - 90,
 		ind: maxIndex
 	});
