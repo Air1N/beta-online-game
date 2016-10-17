@@ -42,8 +42,6 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
 	var ground = game.add.sprite(0, game.world.height - 64, 'ground');
-	ground.body.immovable = true;
-	ground.scale.setTo(50, 2);
 	gameState = "loaded";
 	
 	for (i = 0; i <= lUID; i++) {
@@ -64,7 +62,7 @@ function update() {
 	maxIndex++;
 	for (i = 0; i < bird.length; i++) {
 		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
-		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 1920 || bird[i].y < -20) {
+		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 1620 || bird[i].y < -20) {
 			bird[i].destroy();
 			bird.splice(i, 1);
 		}
