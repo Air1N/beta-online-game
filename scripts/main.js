@@ -44,19 +44,12 @@ function create() {
 	ground.body.immovable = true;
 	ground.scale.setTo(50, 2);
 	gameState = "loaded";
-
-	for (i = 0; i <= lUID; i++)
-		loadSprite(i);
 }
 
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
 	var ply = cursor[i].position.y;
 	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
-	game.physics.arcade.enable(cursor[i]);
-	cursor[i].body.bounce.y = 1;
-	cursor[i].body.gravity.y = 0;
-	cursor[i].body.collideWorldBounds = false;
 	cursor[i].tint = Math.random() * 0xffffff;
 	cursor[i].scale.setTo(0.75, 0.75);
 }
@@ -166,7 +159,9 @@ function Input() {
 function spawnBirds() {
 	socket.emit('spawnBird', {
 		x : Math.random() * 800,
-		y : 400
+		y : 400,
+		spd: Math.random() * 150,
+		angl: (Math.random() * 180) - 90
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
@@ -210,9 +205,9 @@ socket.on('updatePos', function (data) {
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	bird[bird.length - 1].index = bird.length - 1;
-	bird[bird.length - 1].speed = Math.random() * 150;
+	bird[bird.length - 1].speed = data.spd;
 	game.physics.p2.enable(bird[bird.length - 1], true);
-	bird[bird.length - 1].body.angle = (Math.random() * 180) - 90;
+	bird[bird.length - 1].body.angle = data.angl;
 	//bird[bird.length - 1].body.fixedRotation = true;
 	if (bird[bird.length - 1].body.angle > 0) bird[bird.length - 1].scale.setTo(-1, 1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
