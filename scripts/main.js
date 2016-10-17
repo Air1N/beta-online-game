@@ -166,7 +166,8 @@ function spawnBirds() {
 		x : Math.random() * 800,
 		y : 400,
 		spd: Math.random() * 150,
-		angl: (Math.random() * 180) - 90
+		angl: (Math.random() * 180) - 90,
+		ind: bird.length
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
@@ -202,7 +203,7 @@ socket.on('updatePos', function (data) {
 
 socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
-	bird[bird.length - 1].index = bird.length - 1;
+	bird[bird.length - 1].index = data.ind;
 	bird[bird.length - 1].speed = data.spd;
 	game.physics.p2.enable(bird[bird.length - 1], true);
 	bird[bird.length - 1].body.angle = data.angl;
