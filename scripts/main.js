@@ -197,8 +197,8 @@ socket.on('lagComp', function (data) {
 
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
-		if (bird[data.ID] != null) bird[data.ID].x = data.x;
-		if (bird[data.ID] != null) bird[data.ID].y = data.y;
+		cursor[data.ID].x = data.x;
+		cursor[data.ID].y = data.y;
 	}
 });
 
