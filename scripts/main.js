@@ -188,13 +188,6 @@ socket.on('birdKill', function (data) {
 	}
 });
 
-
-socket.on('lagComp', function (data) {
-	if (parseInt(data.ID) != parseInt(mUID)) {
-		bird[data.ID].x = bird[data.ID].movex + parseInt(data.x - bird[data.ID].x) / 50;
-	}
-});
-
 socket.on('updatePos', function (data) {
 	if (parseInt(data.ID) != parseInt(mUID)) {
 		cursor[data.ID].x = data.x;
@@ -226,6 +219,7 @@ socket.on('userDisconnect', function (UserID) {
 	if (UserID < mUID)
 		mUID--;
 	lUID--;
+	console.log(lUID);
 });
 
 function getCookie(cname) {
