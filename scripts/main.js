@@ -67,6 +67,7 @@ function update() {
 			bird.splice(i, 1);
 		}
 	}
+	ground.bringToTop();
 	for (i = 0; i < cursor.length; i++) {
 		cursor[i].bringToTop();
 	}
