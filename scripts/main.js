@@ -22,7 +22,7 @@ function preload() {
 	game.stage.disableVisibilityChange = true;
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
-	game.load.image('ground', '/assets/bird.png');
+	game.load.image('ground', '/assets/ground.png');
 	
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -64,7 +64,7 @@ function update() {
 	maxIndex++;
 	for (i = 0; i < bird.length; i++) {
 		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
-		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
+		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 1920 || bird[i].y < -20) {
 			bird[i].destroy();
 			bird.splice(i, 1);
 		}
