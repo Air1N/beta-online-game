@@ -207,7 +207,7 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length] = game.add.sprite(data.x, data.y, 'bird');
 	bird[bird.length - 1].index = data.ind;
 	bird[bird.length - 1].speed = data.spd;
-	game.physics.p2.enable(bird[bird.length - 1], true);
+	game.physics.p2.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.angle = data.angl;
 	if (bird[bird.length - 1].body.angle > 0) bird[bird.length - 1].scale.setTo(-1, 1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
