@@ -129,6 +129,7 @@ socket.on('userConnect', function (data) {
 				}
 			};
 			loadSprite(i);
+			points[i] = 0;
 		}
 	}
 	socket.emit('updatePos', {
