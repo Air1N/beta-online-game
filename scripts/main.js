@@ -91,7 +91,6 @@ window.onmousemove = function () {
 window.onclick = function() {
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
 	for (j = 0; j < overlap.length; j++) {
-		console.log(bird.indexOf(overlap[j].parent.sprite))
 		i = bird.indexOf(overlap[j].parent.sprite);
 		if (bird[i] != null) bird[i].destroy();
 		if (bird[i] != null) bird.splice(i, 1);
