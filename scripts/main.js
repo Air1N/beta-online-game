@@ -92,9 +92,9 @@ window.onclick = function() {
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
 	for (j = 0; j < overlap.length; j++) {
 		i = bird.indexOf(overlap[j].parent.sprite);
+		if (bird[i] != null) socket.emit('birdKill', {index: bird[i].index, UID: mUID});
 		if (bird[i] != null) bird[i].destroy();
 		if (bird[i] != null) bird.splice(i, 1);
-		if (bird[i] != null) socket.emit('birdKill', {ID: i, UID: mUID});
 	}
 }
 
@@ -186,10 +186,15 @@ socket.on('move', function (data) {
 });
 
 socket.on('birdKill', function (data) {
+	for (i = 0; i < bird.length; i++) {
+		if (bird[i].index == data.index) {
+			z = i;
+		}
+	}
 	points[data.UID]++;
 	if(data.UID != mUID) {
-		bird[data.ID].destroy();
-		bird.splice(data.ID, 1);
+		bird[z].destroy();
+		bird.splice(z, 1);
 	}
 });
 
