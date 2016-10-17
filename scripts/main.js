@@ -9,7 +9,7 @@ var chatFade = 0;
 var bird = [];
 var cursor = [];
 var points = [];
-var game = new Phaser.Game(800, 400, Phaser.AUTO, '', {
+var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
 		update : update
@@ -22,6 +22,7 @@ function preload() {
 	game.stage.disableVisibilityChange = true;
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
+	game.load.image('ground', '/assets/bird.png');
 	
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -40,9 +41,7 @@ function create() {
 	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
-	platforms = game.add.group();
-	platforms.enableBody = true;
-	var ground = platforms.create(-200, game.world.height - 64, 'bird');
+	var ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	ground.body.immovable = true;
 	ground.scale.setTo(50, 2);
 	gameState = "loaded";
@@ -165,8 +164,8 @@ function Input() {
 
 function spawnBirds() {
 	socket.emit('spawnBird', {
-		x : Math.random() * 800,
-		y : 400,
+		x : Math.random() * 1600,
+		y : 901,
 		spd: Math.random() * 150,
 		angl: (Math.random() * 180) - 90,
 		ind: maxIndex
