@@ -16,6 +16,7 @@ var game = new Phaser.Game(800, 400, Phaser.AUTO, '', {
 	});
 var target;
 var gameState = "";
+var maxIndex = 0;
 
 function preload() {
 	game.stage.disableVisibilityChange = true;
@@ -61,6 +62,7 @@ function loadSprite(i) {
 }
 
 function update() {
+	maxIndex++;
 	for (i = 0; i < bird.length; i++) {
 		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
 		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 820 || bird[i].y < -20) {
@@ -167,7 +169,7 @@ function spawnBirds() {
 		y : 400,
 		spd: Math.random() * 150,
 		angl: (Math.random() * 180) - 90,
-		ind: bird.length
+		ind: maxIndex
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
