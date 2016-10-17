@@ -166,7 +166,7 @@ function spawnBirds() {
 		x : Math.random() * 800,
 		y : 400
 	});
-	setTimeout(spawnBirds, 1000 * Math.random());
+	setTimeout(spawnBirds, 10000 * Math.random());
 }
 spawnBirds();
 
