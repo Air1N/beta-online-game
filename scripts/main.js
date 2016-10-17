@@ -41,7 +41,7 @@ function create() {
 	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
-	var ground = game.add.sprite(0, game.world.height - 64, 'ground');
+	ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	gameState = "loaded";
 	
 	for (i = 0; i <= lUID; i++) {
