@@ -48,11 +48,11 @@ function create() {
 	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 400);
 	
 	topScores = [
-		game.add.text(1375, 40, "REFRESH THE PAGE!"),
-		game.add.text(1375, 80, "REFRESH THE PAGE!"),
-		game.add.text(1375, 120, "REFRESH THE PAGE!"),
-		game.add.text(1375, 160, "REFRESH THE PAGE!"),
-		game.add.text(1375, 200, "REFRESH THE PAGE!")
+		game.add.text(1375, 75, "REFRESH THE PAGE!"),
+		game.add.text(1375, 150, "REFRESH THE PAGE!"),
+		game.add.text(1375, 225, "REFRESH THE PAGE!"),
+		game.add.text(1375, 300, "REFRESH THE PAGE!"),
+		game.add.text(1375, 375, "REFRESH THE PAGE!")
 	]
 	
 	for (i = 0; i <= lUID; i++) {
