@@ -9,6 +9,7 @@ var chatFade = 0;
 var bird = [];
 var cursor = [];
 var points = [];
+var topScorers = [];
 var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -17,12 +18,13 @@ var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 var target;
 var gameState = "";
 var maxIndex = 0;
+var topPoints;
 
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
 	game.load.image('ground', '/assets/ground.png');
-	
+
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
@@ -46,25 +48,34 @@ function create() {
 	var scoreboardBase = this.game.add.graphics(0, 0);
 	scoreboardBase.beginFill(0x111111, 1);
 	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 300);
-	
+
 	topScores = [
-		game.add.text(1375, 20, "REFRESH THE PAGE!"),
-		game.add.text(1375, 70, "REFRESH THE PAGE!"),
-		game.add.text(1375, 120, "REFRESH THE PAGE!"),
-		game.add.text(1375, 170, "REFRESH THE PAGE!"),
-		game.add.text(1375, 220, "REFRESH THE PAGE!")
+		game.add.text(1375, 20, ""),
+		game.add.text(1375, 70, ""),
+		game.add.text(1375, 120, ""),
+		game.add.text(1375, 170, ""),
+		game.add.text(1375, 220, "")
 	]
-	
+
 	for (i = 0; i < topScores.length; i++) {
 		topScores[i].font = "Calibri"
-		topScores[i].fontSize = "16px"
-		topScores[i].addColor("#e0e0e0", 0)
+			topScores[i].fontSize = "16px"
+			topScores[i].addColor("#e0e0e0", 0)
 	}
-	
+
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
 	spawnBirds();
+}
+
+function topScore() {
+	topPoints = points;
+	points.sort();
+	for (i = 0; i < 5; i++) {
+		topScorers[i] = points[i] + "___" + topPoints.indexOf(points[i])
+		topScores[i].text = topScorers[i];
+	}
 }
 
 function loadSprite(i) {
@@ -78,7 +89,8 @@ function loadSprite(i) {
 function update() {
 	maxIndex++;
 	for (i = 0; i < bird.length; i++) {
-		if (bird[i] != null) bird[i].body.thrust(bird[i].speed);
+		if (bird[i] != null)
+			bird[i].body.thrust(bird[i].speed);
 		if (bird[i] != null && bird[i].x < -20 || bird[i].x > 1620 || bird[i].y < -20) {
 			bird[i].destroy();
 			bird.splice(i, 1);
@@ -96,8 +108,7 @@ window.onmousemove = function () {
 	var mouseY = game.input.mousePointer.y;
 	cursor[mUID].x = mouseX - 12;
 	cursor[mUID].y = mouseY - 12;
-	
-	
+
 	socket.emit('moveCursor', {
 		x : mouseX - 12,
 		y : mouseY - 12,
@@ -105,13 +116,19 @@ window.onmousemove = function () {
 	})
 }
 
-window.onclick = function() {
+window.onclick = function () {
 	overlap = game.physics.p2.hitTest(game.input.mousePointer.position, bird);
 	for (j = 0; j < overlap.length; j++) {
 		i = bird.indexOf(overlap[j].parent.sprite);
-		if (bird[i] != null) socket.emit('birdKill', {index: bird[i].index, UID: mUID});
-		if (bird[i] != null) bird[i].destroy();
-		if (bird[i] != null) bird.splice(i, 1);
+		if (bird[i] != null)
+			socket.emit('birdKill', {
+				index : bird[i].index,
+				UID : mUID
+			});
+		if (bird[i] != null)
+			bird[i].destroy();
+		if (bird[i] != null)
+			bird.splice(i, 1);
 	}
 }
 
@@ -129,9 +146,9 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	
+
 	console.log(lUID);
-	
+
 	if (mUID === undefined)
 		mUID = UserID;
 	for (i = 0; i <= lUID; i++) {
@@ -181,9 +198,9 @@ function spawnBirds() {
 	socket.emit('spawnBird', {
 		x : Math.random() * 1600,
 		y : 901,
-		spd: (Math.random() * 100) + 50,
-		angl: (Math.random() * 180) - 90,
-		ind: maxIndex
+		spd : (Math.random() * 100) + 50,
+		angl : (Math.random() * 180) - 90,
+		ind : maxIndex
 	});
 	setTimeout(spawnBirds, 10000 * Math.random());
 }
@@ -209,7 +226,7 @@ socket.on('birdKill', function (data) {
 		}
 	}
 	points[data.UID]++;
-	if(data.UID != mUID) {
+	if (data.UID != mUID) {
 		bird[z].destroy();
 		bird.splice(z, 1);
 	}
@@ -228,7 +245,8 @@ socket.on('spawnBird', function (data) {
 	bird[bird.length - 1].speed = data.spd;
 	game.physics.p2.enable(bird[bird.length - 1]);
 	bird[bird.length - 1].body.angle = data.angl;
-	if (bird[bird.length - 1].body.angle > 0) bird[bird.length - 1].scale.setTo(-1, 1);
+	if (bird[bird.length - 1].body.angle > 0)
+		bird[bird.length - 1].scale.setTo(-1, 1);
 	bird[bird.length - 1].body.collideWorldBounds = false;
 });
 
