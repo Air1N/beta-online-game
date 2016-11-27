@@ -19,7 +19,6 @@ var gameState = "";
 var maxIndex = 0;
 
 function preload() {
-	game.stage.disableVisibilityChange = true;
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
 	game.load.image('ground', '/assets/ground.png');
@@ -33,6 +32,7 @@ function preload() {
 }
 
 function create() {
+	game.stage.disableVisibilityChange = true;
 	game.renderer.renderSession.roundPixels = true;
 	cursors = game.input.keyboard.createCursorKeys();
 	w = game.input.keyboard.addKey(Phaser.Keyboard.W);
