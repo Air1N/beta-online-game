@@ -45,18 +45,18 @@ function create() {
 	gameState = "loaded";
 	var scoreboardBase = this.game.add.graphics(0, 0);
 	scoreboardBase.beginFill(0x111111, 1);
-	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 400);
+	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 200);
 	
 	topScores = [
-		game.add.text(1375, 40, "REFRESH THE PAGE!"),
-		game.add.text(1375, 80, "REFRESH THE PAGE!"),
-		game.add.text(1375, 120, "REFRESH THE PAGE!"),
-		game.add.text(1375, 160, "REFRESH THE PAGE!"),
-		game.add.text(1375, 200, "REFRESH THE PAGE!")
+		game.add.text(1375, 20, "REFRESH THE PAGE!"),
+		game.add.text(1375, 60, "REFRESH THE PAGE!"),
+		game.add.text(1375, 100, "REFRESH THE PAGE!"),
+		game.add.text(1375, 140, "REFRESH THE PAGE!"),
+		game.add.text(1375, 180, "REFRESH THE PAGE!")
 	]
 	
 	for (i = 0; i < topScores.length; i++) {
-		topScores[i].font = "16px Arial"
+		topScores[i].font = "16px Calibri"
 		topScores[i].addColor("#e0e0e0", 0)
 	}
 	
