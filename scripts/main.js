@@ -18,7 +18,7 @@ var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 var target;
 var gameState = "";
 var maxIndex = 0;
-var topPoints;
+var topPoints = [];
 
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
@@ -66,7 +66,6 @@ function create() {
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
-	spawnBirds();
 }
 
 function topScore() {
@@ -77,6 +76,8 @@ function topScore() {
 		topScores[i].text = topScorers[i];
 	}
 }
+
+setInterval(topScore, 1000/20)
 
 function loadSprite(i) {
 	var plx = cursor[i].position.x;
@@ -265,6 +266,8 @@ socket.on('userDisconnect', function (UserID) {
 	lUID--;
 	console.log(lUID);
 });
+
+spawnBirds();
 
 function getCookie(cname) {
 	var name = cname + "=";
