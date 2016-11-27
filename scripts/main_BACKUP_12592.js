@@ -45,15 +45,25 @@ function create() {
 	gameState = "loaded";
 	var scoreboardBase = this.game.add.graphics(0, 0);
 	scoreboardBase.beginFill(0x111111, 1);
-	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 400);
+	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 200);
 	
 	topScores = [
-		game.add.text(1375, 40, "REFRESH THE PAGE!"),
-		game.add.text(1375, 80, "REFRESH THE PAGE!"),
-		game.add.text(1375, 120, "REFRESH THE PAGE!"),
-		game.add.text(1375, 160, "REFRESH THE PAGE!"),
-		game.add.text(1375, 200, "REFRESH THE PAGE!")
+<<<<<<< HEAD
+		game.add.text(1375, 20, "REFRESH THE PAGE!"),
+		game.add.text(1375, 60, "REFRESH THE PAGE!"),
+		game.add.text(1375, 100, "REFRESH THE PAGE!"),
+		game.add.text(1375, 140, "REFRESH THE PAGE!"),
+		game.add.text(1375, 180, "REFRESH THE PAGE!")
+=======
+		game.add.text(1375, 75, "REFRESH THE PAGE!"),
+		game.add.text(1375, 150, "REFRESH THE PAGE!"),
+		game.add.text(1375, 225, "REFRESH THE PAGE!"),
+		game.add.text(1375, 300, "REFRESH THE PAGE!"),
+		game.add.text(1375, 375, "REFRESH THE PAGE!")
+>>>>>>> 095e891ff70357b38af94bdce1ccde25289f47e4
 	]
+	
+	
 	
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
