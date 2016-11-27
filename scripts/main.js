@@ -55,6 +55,11 @@ function create() {
 		game.add.text(1375, 200, "REFRESH THE PAGE!")
 	]
 	
+	for (i = 0; i < topScores.length; i++) {
+		topScores[i].font = "16px Arial"
+		topScores[i].addColor("#e0e0e0", 0)
+	}
+	
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
