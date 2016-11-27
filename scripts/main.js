@@ -44,8 +44,16 @@ function create() {
 	ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	gameState = "loaded";
 	var scoreboardBase = this.game.add.graphics(0, 0);
-	scoreboardBase.beginFill(0x008800, 1);
+	scoreboardBase.beginFill(0x111111, 1);
 	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 400);
+	
+	topScores = [
+		game.add.text(1375, 40, "REFRESH THE PAGE!"),
+		game.add.text(1375, 80, "REFRESH THE PAGE!"),
+		game.add.text(1375, 120, "REFRESH THE PAGE!"),
+		game.add.text(1375, 160, "REFRESH THE PAGE!"),
+		game.add.text(1375, 200, "REFRESH THE PAGE!")
+	]
 	
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
