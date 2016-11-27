@@ -43,6 +43,9 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.P2JS);
 	ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	gameState = "loaded";
+	var scoreboardBase = this.game.add.graphics(0, 0);
+	scoreboardBase.beginFill(0x008800, 1);
+	scoreboard = scoreboardBase.drawRect(1350, 0, 250, 400);
 	
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
