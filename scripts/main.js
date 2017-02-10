@@ -10,6 +10,7 @@ var bird = [];
 var cursor = [];
 var points = [];
 var topScorers = [];
+var usedIndex = [];
 var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -69,6 +70,7 @@ function create() {
 }
 
 function topScore() {
+	usedIndex = [];
 	for (i = 0; i < points.length; i++) {
 		topPoints[i] = points[i];
 	}
@@ -76,7 +78,9 @@ function topScore() {
 	console.debug(points)
 	console.debug(topPoints)
 	for (i = 0; i < 5; i++) {
-		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i])
+		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i]);
+		usedIndex.push(topPoints.indexOf(points[i]));
+		topPoints.indexOf(points[i]);
 		topScores[i].text = topScorers[i];
 	}
 	for (i = 0; i < topPoints.length; i++) {
