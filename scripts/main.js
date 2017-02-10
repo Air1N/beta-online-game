@@ -75,8 +75,6 @@ function topScore() {
 		topPoints[i] = points[i];
 	}
 	points.sort(function(a, b){return b-a});
-	console.debug(points)
-	console.debug(topPoints)
 	for (i = 0; i < 5; i++) {
 		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i]);
 		usedIndex.push(topPoints.indexOf(points[i]));
