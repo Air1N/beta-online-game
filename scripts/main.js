@@ -69,7 +69,9 @@ function create() {
 }
 
 function topScore() {
-	topPoints = points;
+	for (i = 0; i < points.length; i++) {
+		topPoints[i] = points[i];
+	}
 	points.sort(function(a, b){return b-a});
 	console.debug(points)
 	console.debug(topPoints)
@@ -77,7 +79,9 @@ function topScore() {
 		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i])
 		topScores[i].text = topScorers[i];
 	}
-	points = topPoints;
+	for (i = 0; i < topPoints.length; i++) {
+		points[i] = topPoints[i];
+	}
 }
 
 setInterval(topScore, 1000/20)
