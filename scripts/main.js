@@ -75,6 +75,7 @@ function topScore() {
 		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i])
 		topScores[i].text = topScorers[i];
 	}
+	points = topPoints;
 }
 
 setInterval(topScore, 1000/20)
