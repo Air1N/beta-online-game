@@ -72,7 +72,7 @@ function topScore() {
 	topPoints = points;
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
-		topScorers[i] = points[i] + "___" + topPoints.indexOf(points[i])
+		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i])
 		topScores[i].text = topScorers[i];
 	}
 }
