@@ -20,7 +20,7 @@ var target;
 var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
-
+var pointCache = [];
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
@@ -73,16 +73,16 @@ function topScore() {
 	usedIndex = [];
 	for (i = 0; i < points.length; i++) {
 		topPoints[i] = points[i];
+		pointCache[i] = points[i];
 	}
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
 		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i]);
-		usedIndex.push(topPoints.indexOf(points[i]));
-		topPoints.indexOf(points[i]);
+		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
 	}
 	for (i = 0; i < topPoints.length; i++) {
-		points[i] = topPoints[i];
+		points[i] = pointCache[i];
 	}
 }
 
