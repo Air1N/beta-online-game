@@ -187,9 +187,9 @@ socket.on('userConnect', function (data) {
 	});
 });
 
-socket.on('newName', function(name)) {
+socket.on('newName', function(name) {
 	name[data.UserID] = data.username;
-}
+});
 
 function openChat() {
 	if (chatFade < 0.85 && isChatOpen) {
