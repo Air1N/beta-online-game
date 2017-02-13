@@ -21,7 +21,8 @@ io.on('connection', function (socket) {
 	var UserID = allClients.indexOf(socket);
 	io.emit('userConnect', {
 		UserID : UserID,
-		laUID : allClients.length - 1
+		laUID : allClients.length - 1,
+		username: name
 	});
 	console.log('ID: ' + UserID + ' connected.');
 
