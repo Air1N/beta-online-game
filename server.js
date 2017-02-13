@@ -21,8 +21,7 @@ io.on('connection', function (socket) {
 	var UserID = allClients.indexOf(socket);
 	io.emit('userConnect', {
 		UserID : UserID,
-		laUID : allClients.length - 1,
-		username: name
+		laUID : allClients.length - 1
 	});
 	console.log('ID: ' + UserID + ' connected.');
 
@@ -60,6 +59,10 @@ io.on('connection', function (socket) {
 	
 	socket.on('birdKill', function (data) {
 		io.emit('birdKill', data);
+	});
+	
+	socket.on('newName', function (data) {
+		io.emit('newName', data);
 	});
 });
 
