@@ -187,7 +187,7 @@ socket.on('userConnect', function (data) {
 	});
 });
 
-socket.on('newName', function(name) {
+socket.on('newName', function(data) {
 	name[data.UserID] = data.username;
 });
 
