@@ -24,7 +24,7 @@ var pointCache = [];
 var username = prompt("Username:");
 var usernames = [];
 
-socket.emit('newName', {
+socket.emit('newData', {
 	username: username,
 	UserID: mUID
 });
@@ -168,10 +168,6 @@ socket.on('userConnect', function (data) {
 	usernames[UserID] = "";
 	if (mUID === undefined) {
 		mUID = UserID;
-		socket.emit('newName', {
-			username: username,
-			ID: mUID
-		});
 	}
 	for (i = 0; i <= lUID; i++) {
 		if (cursor[i] == null) {
@@ -190,10 +186,16 @@ socket.on('userConnect', function (data) {
 		x : cursor[mUID].position.x,
 		y : cursor[mUID].position.y
 	});
+	socket.emit('newData', {
+		username: username,
+		ID: mUID,
+		points: points[mUID]
+	});
 });
 
-socket.on('newName', function(data) {
+socket.on('newData', function(data) {
 	usernames[data.ID] = data.username;
+	if (data.points != undefined) points[data.ID] = data.points;
 });
 
 function openChat() {
