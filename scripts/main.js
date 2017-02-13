@@ -21,7 +21,8 @@ var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
-var name = prompt("Username:").split(" ");
+var username = prompt("Username:");
+var name = [];
 
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
@@ -158,7 +159,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	
+	name[UserID] = data.username;
 	console.log(lUID);
 
 	if (mUID === undefined)
