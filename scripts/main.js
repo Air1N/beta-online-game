@@ -22,7 +22,7 @@ var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
 var username = prompt("Username:");
-var name = [];
+var usernames = [];
 
 socket.emit('newName', {
 	username: username,
@@ -85,7 +85,7 @@ function topScore() {
 	}
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
-		topScorers[i] = points[i] + " " + name[topPoints.indexOf(points[i])];
+		topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])];
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
 	}
@@ -165,7 +165,7 @@ socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
 	console.log(lUID);
-	name[UserID] = [];
+	usernames[UserID] = "";
 	if (mUID === undefined) {
 		mUID = UserID;
 		socket.emit('newName', {
@@ -193,7 +193,7 @@ socket.on('userConnect', function (data) {
 });
 
 socket.on('newName', function(data) {
-	name[data.ID] = data.username;
+	usernames[data.ID] = data.username;
 });
 
 function openChat() {
