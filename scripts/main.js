@@ -24,6 +24,11 @@ var pointCache = [];
 var username = prompt("Username:");
 var name = [];
 
+socket.emit('newName', {
+	username: username,
+	UserID: mUID
+});
+
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
@@ -159,7 +164,6 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	name[UserID] = data.username;
 	console.log(lUID);
 
 	if (mUID === undefined)
@@ -182,6 +186,10 @@ socket.on('userConnect', function (data) {
 		y : cursor[mUID].position.y
 	});
 });
+
+socket.on('newName', function(name)) {
+	name[data.UserID] = data.username;
+}
 
 function openChat() {
 	if (chatFade < 0.85 && isChatOpen) {
