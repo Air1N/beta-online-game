@@ -165,12 +165,12 @@ socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
 	console.log(lUID);
-
+	name[UserID] = [];
 	if (mUID === undefined) {
 		mUID = UserID;
 		socket.emit('newName', {
 			username: username,
-			UserID: mUID
+			ID: mUID
 		});
 	}
 	for (i = 0; i <= lUID; i++) {
@@ -193,7 +193,7 @@ socket.on('userConnect', function (data) {
 });
 
 socket.on('newName', function(data) {
-	name[data.UserID] = data.username;
+	name[data.ID] = data.username;
 });
 
 function openChat() {
