@@ -61,8 +61,8 @@ io.on('connection', function (socket) {
 		io.emit('birdKill', data);
 	});
 	
-	socket.on('newName', function (data) {
-		io.emit('newName', data);
+	socket.on('newData', function (data) {
+		io.emit('newData', data);
 	});
 });
 
