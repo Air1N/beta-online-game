@@ -21,6 +21,8 @@ var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
+var name = prompt("Username:").split(" ");
+
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
@@ -77,7 +79,7 @@ function topScore() {
 	}
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
-		topScorers[i] = points[i] + " " + topPoints.indexOf(points[i]);
+		topScorers[i] = points[i] + " " + name[topPoints.indexOf(points[i])];
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
 	}
@@ -156,7 +158,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-
+	
 	console.log(lUID);
 
 	if (mUID === undefined)
