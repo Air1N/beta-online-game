@@ -166,8 +166,13 @@ socket.on('userConnect', function (data) {
 	UserID = data.UserID;
 	console.log(lUID);
 
-	if (mUID === undefined)
+	if (mUID === undefined) {
 		mUID = UserID;
+		socket.emit('newName', {
+			username: username,
+			UserID: mUID
+		});
+	}
 	for (i = 0; i <= lUID; i++) {
 		if (cursor[i] == null) {
 			cursor[i] = {
