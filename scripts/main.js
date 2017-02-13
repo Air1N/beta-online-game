@@ -23,7 +23,7 @@ var topPoints = [];
 var pointCache = [];
 var username = prompt("Username:");
 var name = [];
-var topScores = [];
+
 socket.emit('newName', {
 	username: username,
 	UserID: mUID
