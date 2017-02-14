@@ -93,13 +93,13 @@ function topScore() {
 		}
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
-		for (i = 0; i < topScorers.length; i++) {
-			if (topScorers[i] != "" && topScorers[i] != "undefined undefined") numberNames++;
+		for (j = 0; j < topScorers.length; j++) {
+			if (topScorers[j] != "" && topScorers[j] != "undefined undefined") numberNames++;
 		}
 		scoreboard.height = (numberNames / 5) * 300;
 	}
-	for (i = 0; i < topPoints.length; i++) {
-		points[i] = pointCache[i];
+	for (k = 0; k < topPoints.length; k++) {
+		points[k] = pointCache[k];
 	}
 }
 
