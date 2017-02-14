@@ -87,7 +87,7 @@ function topScore() {
 	for (i = 0; i < 5; i++) {
 		topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])];
 		topPoints[topPoints.indexOf(points[i])] = "";
-		topScores[i].text = topScorers[i];
+		if (topScorers[i] != "undefined undefined") topScores[i].text = topScorers[i]; else topScores[i].text = "";
 	}
 	for (i = 0; i < topPoints.length; i++) {
 		points[i] = pointCache[i];
