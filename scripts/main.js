@@ -301,6 +301,7 @@ socket.on('userDisconnect', function (UserID) {
 		mUID--;
 	lUID--;
 	console.log(lUID);
+	console.log('ID: ' + UserID + ' disconnected.');
 });
 
 spawnBirds();
