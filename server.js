@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 });
 
 io.sockets.on('connection', function (socket) {
-	var UserID = this.socket.sessionid;
+	var UserID = socket.sessionid;
 	io.sockets.emit('userConnect', {
 		UserID : UserID,
 		laUID : allClients.length - 1
