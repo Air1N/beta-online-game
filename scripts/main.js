@@ -79,6 +79,7 @@ function create() {
 }
 
 function topScore() {
+	numberNames = 0;
 	usedIndex = [];
 	for (i = 0; i < points.length; i++) {
 		topPoints[i] = points[i];
@@ -93,9 +94,7 @@ function topScore() {
 		}
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
-		for (j = 0; j < topScorers.length; j++) {
-			if (topScorers[j] != "" && topScorers[j] != "undefined undefined") numberNames++;
-		}
+		if (topScorers[i] != "" && topScorers[i] != "undefined undefined") numberNames++;
 		scoreboard.height = (numberNames / 5) * 300;
 	}
 	for (k = 0; k < topPoints.length; k++) {
