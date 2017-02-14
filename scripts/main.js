@@ -93,7 +93,7 @@ function topScore() {
 			topScorers.splice(i, 1);
 		}
 		topPoints[topPoints.indexOf(points[i])] = "";
-		topScores[i].text = topScorers[i];
+		if (usernames[topPoints.indexOf(points[i])] != undefined && points[i] != 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && points[i] != 0) numberNames++;
 		scoreboard.height = (numberNames / 5) * 300;
 	}
