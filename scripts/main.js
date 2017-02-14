@@ -78,6 +78,7 @@ function create() {
 }
 
 function topScore() {
+	var numberNames;
 	usedIndex = [];
 	for (i = 0; i < points.length; i++) {
 		topPoints[i] = points[i];
@@ -88,6 +89,10 @@ function topScore() {
 		if (usernames[topPoints.indexOf(points[i])] != undefined) topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])]; else topScorers[i] = "";
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i]; else topScores[i].text = "";
+		for (i = 0; i < topScorers.length; i++) {
+			if (topScorers[i] != "" && topScorers[i] != "undefined undefined") numberNames++;
+		}
+		scoreboard.height = (numberNames / 5) * 300;
 	}
 	for (i = 0; i < topPoints.length; i++) {
 		points[i] = pointCache[i];
