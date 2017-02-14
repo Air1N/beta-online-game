@@ -87,15 +87,16 @@ function topScore() {
 	}
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
-		if (usernames[topPoints.indexOf(points[i])] != undefined && points[i] != 0) {
+		if (usernames[topPoints.indexOf(points[i])] != undefined && points[i] > 0) {
 			topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])];
 		} else {
 			topScorers.splice(i, 1);
 		}
-		topPoints[topPoints.indexOf(points[i])] = "";
-		if (usernames[topPoints.indexOf(points[i])] != undefined && points[i] != 0) topScores[i].text = topScorers[i];
+		
+		if (usernames[topPoints.indexOf(points[i])] != null && points[i] > 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && points[i] != 0) numberNames++;
 		scoreboard.height = (numberNames / 5) * 300;
+		topPoints[topPoints.indexOf(points[i])] = "";
 	}
 	for (k = 0; k < topPoints.length; k++) {
 		points[k] = pointCache[k];
