@@ -23,6 +23,7 @@ var topPoints = [];
 var pointCache = [];
 var username = prompt("Username:");
 var usernames = [];
+var numberNames = 0;
 
 socket.emit('newData', {
 	username: username,
@@ -78,7 +79,6 @@ function create() {
 }
 
 function topScore() {
-	var numberNames;
 	usedIndex = [];
 	for (i = 0; i < points.length; i++) {
 		topPoints[i] = points[i];
