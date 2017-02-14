@@ -86,9 +86,13 @@ function topScore() {
 	}
 	points.sort(function(a, b){return b-a});
 	for (i = 0; i < 5; i++) {
-		if (usernames[topPoints.indexOf(points[i])] != undefined) topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])]; else topScorers[i] = "";
+		if (usernames[topPoints.indexOf(points[i])] != undefined) {
+			topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])];
+		} else {
+			topScorers[i] = "";
+		}
 		topPoints[topPoints.indexOf(points[i])] = "";
-		topScores[i].text = topScorers[i]; else topScores[i].text = "";
+		topScores[i].text = topScorers[i];
 		for (i = 0; i < topScorers.length; i++) {
 			if (topScorers[i] != "" && topScorers[i] != "undefined undefined") numberNames++;
 		}
