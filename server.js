@@ -4,9 +4,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 80;
 var connections = 0;
-var UserID = 0;
-
-var allClients = [];
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
@@ -17,8 +14,7 @@ app.get('/', function (req, res) {
 });
 
 io.sockets.on('connection', function (socket) {
-	allClients.push(socket);
-	var UserID = allClients.indexOf(socket);
+	var UserID = this.socket.sessionid;
 	io.sockets.emit('userConnect', {
 		UserID : UserID,
 		laUID : allClients.length - 1
@@ -26,15 +22,8 @@ io.sockets.on('connection', function (socket) {
 	console.log('ID: ' + UserID + ' connected.');
 
 	socket.once('disconnect', function () {
-		var UserID = allClients.indexOf(socket);
 		console.log('ID: ' + UserID + ' disconnected.');
-		for (i = 0; i < allClients.length; i++) {
-			if (i > UserID) {
-				console.log('ID: ' + i + ' -> ' + parseInt(i - 1));
-			}
-		}
 		io.sockets.emit('userDisconnect', UserID)
-		allClients.splice(UserID, 1);
 	});
 
 	socket.on('chat message', function (msg) {
