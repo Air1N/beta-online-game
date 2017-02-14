@@ -21,14 +21,10 @@ var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
-var username = prompt("Username:");
+
 var usernames = [];
 var numberNames = 0;
 
-socket.emit('newData', {
-	username: username,
-	UserID: mUID
-});
 
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
@@ -76,6 +72,12 @@ function create() {
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
+	
+	var username = prompt("Username:");
+	socket.emit('newData', {
+		username: username,
+		UserID: mUID
+	});
 }
 
 function topScore() {
