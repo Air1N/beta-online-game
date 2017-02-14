@@ -16,16 +16,16 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
 	allClients.push(socket);
 	var UserID = allClients.indexOf(socket);
-	io.emit('userConnect', {
+	io.sockets.emit('userConnect', {
 		UserID : UserID,
 		laUID : allClients.length - 1
 	});
 	console.log('ID: ' + UserID + ' connected.');
 
-	socket.on('disconnect', function () {
+	socket.once('disconnect', function () {
 		var UserID = allClients.indexOf(socket);
 		console.log('ID: ' + UserID + ' disconnected.');
 		for (i = 0; i < allClients.length; i++) {
@@ -33,36 +33,36 @@ io.on('connection', function (socket) {
 				console.log('ID: ' + i + ' -> ' + parseInt(i - 1));
 			}
 		}
-		io.emit('userDisconnect', UserID)
+		io.sockets.emit('userDisconnect', UserID)
 		allClients.splice(UserID, 1);
 	});
 
 	socket.on('chat message', function (msg) {
-		io.emit('chat message', msg);
+		io.sockets.emit('chat message', msg);
 	});
 
 	socket.on('updatePos', function (data) {
-		io.emit('updatePos', data);
+		io.sockets.emit('updatePos', data);
 	});
 
 	socket.on('move', function (data) {
-		io.emit('move', data);
+		io.sockets.emit('move', data);
 	});
 
 	socket.on('spawnBird', function (data) {
-		io.emit('spawnBird', data);
+		io.sockets.emit('spawnBird', data);
 	});
 
 	socket.on('moveCursor', function (data) {
-		io.emit('moveCursor', data);
+		io.sockets.emit('moveCursor', data);
 	});
 	
 	socket.on('birdKill', function (data) {
-		io.emit('birdKill', data);
+		io.sockets.emit('birdKill', data);
 	});
 	
 	socket.on('newData', function (data) {
-		io.emit('newData', data);
+		io.sockets.emit('newData', data);
 	});
 });
 
