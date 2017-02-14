@@ -90,7 +90,7 @@ function topScore() {
 		if (usernames[topPoints.indexOf(points[i])] != undefined) {
 			topScorers[i] = points[i] + " " + usernames[topPoints.indexOf(points[i])];
 		} else {
-			topScorers[i] = "";
+			topScorers.splice(i, 1);
 		}
 		topPoints[topPoints.indexOf(points[i])] = "";
 		topScores[i].text = topScorers[i];
