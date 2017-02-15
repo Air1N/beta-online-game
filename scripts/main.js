@@ -1,4 +1,3 @@
-var io = require('socket.io-client');
 var socket = io();
 var mUID;
 var left = false;
