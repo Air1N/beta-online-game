@@ -176,7 +176,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	console.log(lUID);
+	console.log("ID:" + UserID + "connected.");
 	usernames[UserID] = "";
 	if (mUID === undefined) {
 		mUID = UserID;
@@ -298,13 +298,12 @@ socket.on('moveCursor', function (data) {
 });
 
 socket.on('userDisconnect', function (UserID) {
+	console.log("ID:" + UserID + "disconnected.")
 	cursor[UserID].destroy();
 	cursor.splice(UserID, 1);
 	if (UserID < mUID)
 		mUID--;
 	lUID--;
-	console.log(lUID);
-	console.log('ID: ' + UserID + ' disconnected.');
 });
 
 spawnBirds();
