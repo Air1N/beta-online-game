@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 80;
 var connections = 0;
+var allClients = -1;
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
@@ -17,13 +18,14 @@ io.sockets.on('connection', function (socket) {
 	var UserID = socket.sessionid;
 	io.sockets.emit('userConnect', {
 		UserID : UserID,
-		laUID : allClients.length - 1
+		laUID : allClients
 	});
 	console.log('ID: ' + UserID + ' connected.');
 
 	socket.once('disconnect', function () {
 		console.log('ID: ' + UserID + ' disconnected.');
-		io.sockets.emit('userDisconnect', UserID)
+		io.sockets.emit('userDisconnect', UserID);
+		allClients--;
 	});
 
 	socket.on('chat message', function (msg) {
