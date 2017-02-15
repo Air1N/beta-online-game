@@ -23,7 +23,7 @@ io.sockets.on('connection', function (socket) {
 	});
 	console.log('ID: ' + UserID + ' connected.');
 
-	socket.on('disconnect', function (UserID) {
+	socket.on('disconnect', function () {
 		console.log('ID: ' + UserID + ' disconnected.');
 		io.sockets.emit('userDisconnect', UserID);
 		allClients--;
