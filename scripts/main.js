@@ -73,7 +73,8 @@ function create() {
 		loadSprite(i);
 	}
 	
-	var username = prompt("Username:");
+	//var username = prompt("Username:");
+	var username = "Dank1"
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
