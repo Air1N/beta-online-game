@@ -98,7 +98,7 @@ function topScore() {
 		
 		if (usernames[topPoints.indexOf(points[i])] != null && points[i] > 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && usernames[topPoints.indexOf(points[i])] != undefined && points[i] > 0) numberNames++;
-		scoreboard.height = (numberNames / 5) * 300;
+		if (scoreboard != null) scoreboard.height = (numberNames / 5) * 300;
 		topPoints[topPoints.indexOf(points[i])] = "";
 	}
 	for (k = 0; k < topPoints.length; k++) {
@@ -109,11 +109,13 @@ function topScore() {
 setInterval(topScore, 1000/20)
 
 function loadSprite(i) {
-	var plx = cursor[i].position.x;
-	var ply = cursor[i].position.y;
-	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
-	cursor[i].tint = Math.random() * 0xffffff;
-	cursor[i].scale.setTo(0.75, 0.75);
+	if (cursor[i] != null) {
+		var plx = cursor[i].position.x;
+		var ply = cursor[i].position.y;
+		cursor[i] = game.add.sprite(plx, ply, 'crosshair');
+		cursor[i].tint = Math.random() * 0xffffff;
+		cursor[i].scale.setTo(0.75, 0.75);
+	}
 }
 
 function update() {
