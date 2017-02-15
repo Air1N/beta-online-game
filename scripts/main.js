@@ -11,6 +11,7 @@ var cursor = [];
 var points = [];
 var topScorers = [];
 var usedIndex = [];
+var username = "";
 var game = new Phaser.Game(1600, 900, Phaser.AUTO, '', {
 		preload : preload,
 		create : create,
@@ -73,7 +74,7 @@ function create() {
 		loadSprite(i);
 	}
 	
-	var username = prompt("Username:");
+	username = prompt("Username:");
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
