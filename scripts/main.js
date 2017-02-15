@@ -73,8 +73,7 @@ function create() {
 		loadSprite(i);
 	}
 	
-	//var username = prompt("Username:");
-	var username = "Dank1"
+	var username = prompt("Username:");
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
@@ -98,7 +97,7 @@ function topScore() {
 		
 		if (usernames[topPoints.indexOf(points[i])] != null && points[i] > 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && usernames[topPoints.indexOf(points[i])] != undefined && points[i] > 0) numberNames++;
-		if (scoreboard != null) scoreboard.height = (numberNames / 5) * 300;
+		scoreboard.height = (numberNames / 5) * 300;
 		topPoints[topPoints.indexOf(points[i])] = "";
 	}
 	for (k = 0; k < topPoints.length; k++) {
@@ -109,13 +108,11 @@ function topScore() {
 setInterval(topScore, 1000/20)
 
 function loadSprite(i) {
-	if (cursor[i] != null) {
-		var plx = cursor[i].position.x;
-		var ply = cursor[i].position.y;
-		cursor[i] = game.add.sprite(plx, ply, 'crosshair');
-		cursor[i].tint = Math.random() * 0xffffff;
-		cursor[i].scale.setTo(0.75, 0.75);
-	}
+	var plx = cursor[i].position.x;
+	var ply = cursor[i].position.y;
+	cursor[i] = game.add.sprite(plx, ply, 'crosshair');
+	cursor[i].tint = Math.random() * 0xffffff;
+	cursor[i].scale.setTo(0.75, 0.75);
 }
 
 function update() {
@@ -138,11 +135,9 @@ function update() {
 window.onmousemove = function () {
 	var mouseX = game.input.mousePointer.x;
 	var mouseY = game.input.mousePointer.y;
-	if (cursor[mUID] != null) {
-		cursor[mUID].x = mouseX - 12;
-		cursor[mUID].y = mouseY - 12;
-	}
-	
+	cursor[mUID].x = mouseX - 12;
+	cursor[mUID].y = mouseY - 12;
+
 	socket.emit('moveCursor', {
 		x : mouseX - 12,
 		y : mouseY - 12,
@@ -197,20 +192,16 @@ socket.on('userConnect', function (data) {
 			points[i] = 0;
 		}
 	}
-	if (cursor[mUID] != null) {
-		socket.emit('updatePos', {
-			ID : mUID,
-			x : cursor[mUID].position.x,
-			y : cursor[mUID].position.y
-		});
-	}
-	if (username != null) {
-		socket.emit('newData', {
-			username: username,
-			ID: mUID,
-			points: points[mUID]
-		});
-	}
+	socket.emit('updatePos', {
+		ID : mUID,
+		x : cursor[mUID].position.x,
+		y : cursor[mUID].position.y
+	});
+	socket.emit('newData', {
+		username: username,
+		ID: mUID,
+		points: points[mUID]
+	});
 });
 
 socket.on('newData', function(data) {
