@@ -26,6 +26,7 @@ var pointCache = [];
 var usernames = [];
 var numberNames = 0;
 
+username = prompt("Username:");
 
 function preload() {
 	game.load.image('bird', '/assets/bird.png');
@@ -74,7 +75,6 @@ function create() {
 		loadSprite(i);
 	}
 	
-	username = prompt("Username:");
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
