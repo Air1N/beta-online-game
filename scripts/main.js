@@ -197,11 +197,13 @@ socket.on('userConnect', function (data) {
 			points[i] = 0;
 		}
 	}
-	socket.emit('updatePos', {
-		ID : mUID,
-		x : cursor[mUID].position.x,
-		y : cursor[mUID].position.y
-	});
+	if (cursor[mUID] != null) {
+		socket.emit('updatePos', {
+			ID : mUID,
+			x : cursor[mUID].position.x,
+			y : cursor[mUID].position.y
+		});
+	}
 	socket.emit('newData', {
 		username: username,
 		ID: mUID,
