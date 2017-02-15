@@ -204,11 +204,13 @@ socket.on('userConnect', function (data) {
 			y : cursor[mUID].position.y
 		});
 	}
-	socket.emit('newData', {
-		username: username,
-		ID: mUID,
-		points: points[mUID]
-	});
+	if (username != null) {
+		socket.emit('newData', {
+			username: username,
+			ID: mUID,
+			points: points[mUID]
+		});
+	}
 });
 
 socket.on('newData', function(data) {
