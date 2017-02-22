@@ -32,7 +32,8 @@ function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
 	game.load.image('ground', '/assets/ground.png');
-
+	game.load.image('sky', '/assets/sky.jpeg');
+	
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
@@ -51,6 +52,7 @@ function create() {
 	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
+	ground = game.add.sprite(0, 0, 'sky');
 	ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	gameState = "loaded";
 	var scoreboardBase = this.game.add.graphics(0, 0);
