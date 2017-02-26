@@ -22,7 +22,7 @@ var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
-
+var JEsus = 0;
 var usernames = [];
 var numberNames = 0;
 
@@ -33,7 +33,7 @@ function preload() {
 	game.load.image('crosshair', '/assets/crosshair.png');
 	game.load.image('ground', '/assets/ground.png');
 	game.load.image('sky', '/assets/sky.jpeg');
-	
+
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
@@ -76,7 +76,7 @@ function create() {
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
-	
+
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
@@ -97,7 +97,7 @@ function topScore() {
 		} else {
 			topScorers.splice(i, 1);
 		}
-		
+
 		if (usernames[topPoints.indexOf(points[i])] != null && points[i] > 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && usernames[topPoints.indexOf(points[i])] != undefined && points[i] > 0) numberNames++;
 		scoreboard.height = (numberNames / 5) * 300;
