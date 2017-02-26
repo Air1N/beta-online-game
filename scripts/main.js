@@ -22,7 +22,7 @@ var gameState = "";
 var maxIndex = 0;
 var topPoints = [];
 var pointCache = [];
-var JEsus = 0;
+
 var usernames = [];
 var numberNames = 0;
 
