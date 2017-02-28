@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-  <title>Chanonymousy</title>
+  <title>Beta Online Game</title>
   <meta name="viewport" content="user-scalable=0"/>
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <style>
