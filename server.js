@@ -7,7 +7,7 @@ var connections = 0;
 var allClients = -1;
 
 //app.use('/assets', express.static(__dirname + '/assets'));
-app.use('.', express.static(__dirname + '.'));
+app.use('/', express.static(__dirname + '/'));
 //app.use('/lib', express.static(__dirname + '/lib'));
 
 app.get('/', function (req, res) {
