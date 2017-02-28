@@ -3,21 +3,24 @@
 <head>
   <title>Chanonymousy</title>
   <meta name="viewport" content="user-scalable=0"/>
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font: 1.1em 'Source Sans Pro', sans-serif; font-weight: bold; width: 100%; display: block; cursor: none;}
+  * { 
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  }
+  body { 
+	font: 1.1em 'Source Sans Pro', sans-serif;
+	font-weight: bold; width: 100%;
+	display: block;
+	cursor: none;
+  }
   </style>
 </head>
 <body style="background: #000000; color: #404040">
-  <div id="removeChat" style="position: absolute; bottom: 0px; left: 0px; width: 0%; height: 0%;">
-	<iframe id="chatBox" src="" style="opacity: 0; position: absolute; bottom:0px; left: 0px; width: 100%; height: 100%;">Your browser doesn't support iFrames. Try updating!</iframe>
-  </div>
+  <a href="/register"><button type="button">Register</button></a>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/lib/jquery.js"></script>
-  <script src="/lib/phaser.js"></script>
   <script src="/scripts/main.js"></script>
 </body>
 </html>
