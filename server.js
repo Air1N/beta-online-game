@@ -6,13 +6,11 @@ var port = process.env.PORT || 80;
 var connections = 0;
 var allClients = -1;
 
-//app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/', express.static(__dirname + '/'));
-//app.use('/lib', express.static(__dirname + '/lib'));
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
-});
+});*/
 
 io.sockets.on('connection', function (socket) {
 	allClients++;
