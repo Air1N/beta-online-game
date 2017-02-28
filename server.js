@@ -11,9 +11,9 @@ app.use('/', express.static(__dirname + '/'));
 io.sockets.on('connection', function (socket) {
   allClients.push(socket);
   var ID = allClients.indexOf(socket);
-  console.debug("ID " + ID + " connected.");
+  console.log("ID " + ID + " connected.");
   socket.on('disconnect', function() {
-    console.debug("ID " + ID + " disconnected.");
+    console.log("ID " + ID + " disconnected.");
     allClients.splice(ID, 1);
   });
 });
