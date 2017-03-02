@@ -4,7 +4,7 @@ if (isset($_POST['register'])) {
   $password = $_POST['password']; 
 }
 
-$link = mysqli_connect("127.0.0.1", "my_user", "my_password", "my_db");
+$link = mysqli_connect();
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
