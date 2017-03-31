@@ -18,7 +18,6 @@
   </style>
 </head>
 <body style="background: #000000; color: #404040">
-  <a href="/register"><button type="button">Register</button></a>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/scripts/main.js"></script>
 </body>
