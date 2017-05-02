@@ -32,7 +32,6 @@ function preload() {
 	game.load.image('bird', '/assets/bird.png');
 	game.load.image('crosshair', '/assets/crosshair.png');
 	game.load.image('ground', '/assets/ground.png');
-	game.load.image('sky', '/assets/sky.jpeg');
 
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -52,7 +51,6 @@ function create() {
 	d = game.input.keyboard.addKey(Phaser.Keyboard.D);
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.startSystem(Phaser.Physics.P2JS);
-	ground = game.add.sprite(0, 0, 'sky');
 	ground = game.add.sprite(0, game.world.height - 64, 'ground');
 	gameState = "loaded";
 	var scoreboardBase = this.game.add.graphics(0, 0);
@@ -76,7 +74,7 @@ function create() {
 	for (i = 0; i <= lUID; i++) {
 		loadSprite(i);
 	}
-
+	
 	socket.emit('newData', {
 		username: username,
 		UserID: mUID
@@ -97,7 +95,7 @@ function topScore() {
 		} else {
 			topScorers.splice(i, 1);
 		}
-
+		
 		if (usernames[topPoints.indexOf(points[i])] != null && points[i] > 0) topScores[i].text = topScorers[i];
 		if (topScorers[i] != "" && topScorers[i] != "undefined undefined" && usernames[topPoints.indexOf(points[i])] != undefined && points[i] > 0) numberNames++;
 		scoreboard.height = (numberNames / 5) * 300;
@@ -178,7 +176,7 @@ function toggleChat() {
 socket.on('userConnect', function (data) {
 	lUID = data.laUID;
 	UserID = data.UserID;
-	console.log("ID:" + UserID + "connected.");
+	console.log(lUID);
 	usernames[UserID] = "";
 	if (mUID === undefined) {
 		mUID = UserID;
@@ -300,12 +298,13 @@ socket.on('moveCursor', function (data) {
 });
 
 socket.on('userDisconnect', function (UserID) {
-	console.log("ID:" + UserID + "disconnected.")
 	cursor[UserID].destroy();
 	cursor.splice(UserID, 1);
 	if (UserID < mUID)
 		mUID--;
 	lUID--;
+	console.log(lUID);
+	console.log('ID: ' + UserID + ' disconnected.');
 });
 
 spawnBirds();
